@@ -88,10 +88,8 @@ merge(Tiddler.prototype,{
 				if (t.actionCanBecomeNext()) {
 					// we still have to check because it might have multiple dependencies
 					if (!t.hasTag('Next')) {
-						if (config.mGTD.getOptChk('AlertForDependentActions')) {
-							alert('Setting dependent action "' + t.title + '" to Next');
-						}
 						t.setTagFromGroup('ActionStatus','Next');
+						displayMessage('Setting dependent action "' + t.title + '" to Next');
 					}
 				}
 			}
@@ -100,10 +98,8 @@ merge(Tiddler.prototype,{
 				// also why we need Future || Next in actionsDependantOnThisAction
 				// don't need to check anything because any one dependency is enough to trigger going back to Future
 				if (!t.hasTag('Future')) {
-					if (config.mGTD.getOptChk('AlertForDependentActions')) {
-						alert('Setting dependent action "' + t.title + '" to Future');
-					}
 					t.setTagFromGroup('ActionStatus','Future');
+					displayMessage('Setting dependent action "' + t.title + '" to Future');
 				}
 			}
 		});

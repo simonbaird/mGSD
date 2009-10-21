@@ -22,6 +22,3 @@ Journal date format:<<mgtdEditField newjournaldateformat MgtdSettings>>
 
 Hour that ticklers should become active on their tickler date. (0 = Midnight, 12 = Midday)
 Tickler activate hour:<<mgtdEditField tickleractivatehour MgtdSettings>>
-
-Should we alert when automatically promoting a dependent action from future to next?
-<<toggleTag AlertForDependentActions MgtdSettings>>

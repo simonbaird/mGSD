@@ -13,7 +13,8 @@ config.mGTD.specialTags = [
         "Tickler",
 		"Reference",
 		"Contact"
-]
+];
+
 config.mGTD.tagsToIndex = [
 		"Action",   // needed for action dependencies
 		"Project",
@@ -29,7 +30,7 @@ config.mGTD.tagsToIndex = [
         "TicklerRepeatType"
 ];
 
-config.mgtdVersion = "3.0 alpha r__REV__";
+config.mgtdVersion = "3.0 alpha __REV__";
 
 config.macros.mgtdVersion={handler:function(place){wikify(config.mgtdVersion,place);}};
 

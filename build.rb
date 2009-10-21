@@ -6,12 +6,7 @@ Dir.chdir Pathname.new(File.dirname(__FILE__)).realpath
 #$LOAD_PATH.unshift("../r4tw") 
 require 'r4tw'
 
-#$svn_ver = `svn info | grep Revision | cut  -d: -f2 | sed 's/ //g'`.chomp
-
-# why is this so hard? help!
-$svn_ver = `find . -name '*.swp' -prune -o -name '.DS_Store' -prune -o -name '.svn' -prune -o -name empties -prune -o -name 'upload' -prune -o -exec svn info {} \\; | grep Revision | cut -d':' -f2 | sort -n | tail -1`.chomp.strip
-
-
+$version_number = 'G' + `date +%y%m%d | sed 's/^0//'`.chomp! # g for git
 
 required = [
 
@@ -168,7 +163,7 @@ make_tw {
   # get_tiddler('MgtdConf').fields['text'].sub!(/__REV__/,Time.now.strftime('%y%m%d.%H%M')[0..-2])
 
   # new: use svn version
-  get_tiddler('MgtdConf').fields['text'].sub!(/__REV__/,$svn_ver)
+  get_tiddler('MgtdConf').fields['text'].sub!(/__REV__/,$version_number)
 
   %w[systemConfig systemTheme].each do |tag|
     #tiddlers_with_tag(tag).each{ |t| t.add_tags(['excludeSearch','excludeLists']) } # makes it too hard to find plugins etc
@@ -217,7 +212,7 @@ Townsville Civic Theatre
 http://previous.townsville.qld.gov.au/theatre/TheatreSeason.asp
   ''')
 
-  add_tiddler_from_scratch('tiddler' => 'Okay to donate blood again', 'tags' => "Tickler Personal Enabled", 'text' => '', 'mgtd_date' => '200907140200' )
+  add_tiddler_from_scratch('tiddler' => 'Okay to donate blood again', 'tags' => "Tickler Personal Enabled", 'text' => '', 'mgtd_date' => '201007140200' )
 
 
   #############
