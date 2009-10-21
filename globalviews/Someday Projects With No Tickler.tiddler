@@ -1,0 +1,6 @@
+(You might want to these Someday/Maybe projects a tickler to remind you to review them at some point in the future)
+
+<<mgtdList startTag:Project title:'Someday/Maybe projects without a tickler'
+  tags:'!Complete && Someday/Maybe' view:Project mode:global
+  where:!tiddler.hasTickler()
+>>

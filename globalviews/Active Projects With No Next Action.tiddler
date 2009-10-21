@@ -1,0 +1,6 @@
+(shows active projects without a next action, sub-project or upcoming tickler)
+
+<<mgtdList startTag:Project title:'You must assign a next action to these projects (or make them into Someday/Maybe)'
+	tags:'!Complete && !Someday/Maybe' view:Project mode:global
+	where:!tiddler.hasNextActionOrSubProjectOrTickler()
+	>>

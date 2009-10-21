@@ -1,0 +1,41 @@
+[[Next Actions|Next Actions by Context]]
+[[Starred Next Actions|Starred Next Actions]]
+[[Next & Waiting Actions|Next and Waiting Actions by Context]]
+[[Next & Waiting (Single Col)|Next and Waiting Actions by Context Single Col]]
+[[Action Dashboard|Action Dashboard by Context]]
+[[Starred Items]]
+[[Tickler Dashboard]]
+[[Tickler Dashboard by Contact]]
+[[Delegated Tasks Dashboard]]
+[[Reference Items]]
+[[Done Actions]]
+
+<slider+ Contexts>
+<<mgtdList startTag:Action tags:'Next && !Done' groupCountOnly:yes group:Context gView:plain where:tiddler.hasActiveProject()>>
+</slider>
+<slider Grouped by Project>
+[[Next Actions|Next Actions by Project]]
+[[Next and Waiting Actions|Next and Waiting Actions by Project]]
+[[Action Dashboard|Action Dashboard by Project]]
+</slider>
+<slider Grouped by Contact>
+[[Next Actions|Next Actions by Contact]]
+[[Next and Waiting Actions|Next and Waiting Actions by Contact]]
+[[Action Dashboard|Action Dashboard by Contact]]
+</slider>
+<slider Ungrouped>
+[[Next Actions]]
+[[Next and Waiting Actions]]
+[[Action Dashboard]]
+</slider>
+<slider All contexts>
+<<mgtdList startTag:Context>>
+</slider>
+
+{{tiny{
+<slider Advanced>
+[[Mankoff Dash]]
+[[modify menu|DoWorkMenu]]
+[[GTDComponent]]
+</slider>
+}}}

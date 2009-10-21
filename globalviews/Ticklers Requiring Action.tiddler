@@ -1,0 +1,12 @@
+<<mgtdList
+	title:'Ticklers Requiring Action'
+	startTag:Tickler
+	tags:'!Actioned'
+	view:Tickler
+	mode:global
+	newButtonTags:'Tickler Enabled Once'
+	where:'tiddler.ticklerIsActive()'
+	sort:'tickleDate'
+	dontShowEmpty:yes
+	ignoreRealm:{{config.mGTD.getOptChk('AlertsIgnoreRealm')?'yes':''}}
+>>

@@ -1,0 +1,87 @@
+table#datePickerTable td.datePickerNav {
+    cursor:pointer;
+}
+
+.datePickerDaysHeader td {
+    text-align:center;
+    background:#ABABAB;
+    font:100% Arial;
+}
+
+/*
+.datePickerDayRow td {
+    width:18px;
+    height:18px;
+}
+*/
+
+td#datePickerMNS, td.datePickerNav {
+    font-weight:bold;
+}
+
+table#datePickerTable {
+    position:absolute;
+    /* border-collapse:collapse; */
+    background:#FFFFFF;
+    border:1px solid #000;
+    display:none;   
+}
+
+table#datePickerTable td {
+    padding: 3px;
+}
+
+td#datePickerMNS {
+    text-align: center;
+}
+
+tr.datePickerDayRow td {
+    background-color : #FFF;
+    cursor : pointer;
+    border : 1px solid #FFF;
+    text-align : center;
+	font-size:100%;
+}
+
+tr.datePickerDayRow td.defaultDate {
+	color : #000;	
+	text-decoration : none;   
+}
+
+tr.datePickerDayRow td.weekend {
+	color:#797!important;
+}
+
+tr.datePickerDowRow td {
+	color:#555;
+	text-align:center;
+	font-size:80%;
+}
+
+tr.datePickerDayRow td.emptyDate {
+    cursor:default; 
+}
+
+tr.datePickerDayRow td.oldDate {
+	color : #ABABAB;
+    text-decoration : line-through;
+}
+
+tr.datePickerDayRow td.highlightedDate {
+    background-color : #fcc;
+	font-weight : bold;
+	border:1px solid #622;
+}
+tr.datePickerDayRow td.highlightedDate.tdover {
+	color : #000;
+}
+
+tr.datePickerDayRow td.todayDate {
+	font-weight : bold;
+	color : red;
+}
+
+table#datePickerTable tr.datePickerDayRow td.tdover {
+    background:#fc6;
+}
+

@@ -1,0 +1,34 @@
+
+{{cols2{
+
+{{col{
+
+<<mgtdList title:'Active Projects' startTag:Project tags:'Active && !Complete' view:Project mode:global
+	group:Area
+	gView:bold
+	newButtonTags:'Project Active'
+	>>
+
+}}}
+
+{{col{
+
+<<mgtdList title:'Someday/Maybe Projects' startTag:Project tags:'Someday/Maybe && !Complete' view:Project mode:global
+	group:Area
+	gView:bold
+	newButtonTags:'Project Someday/Maybe'
+	>>
+
+{{scroll10{
+<<mgtdList title:'Completed Projects' startTag:Project tags:'Complete' view:ProjectComplete mode:global
+	group:Area
+	gView:bold
+	newButtonTags:'Project Active Complete'
+	>>
+
+}}}
+
+}}}
+
+
+}}}

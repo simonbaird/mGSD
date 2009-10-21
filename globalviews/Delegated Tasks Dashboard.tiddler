@@ -1,0 +1,31 @@
+
+{{cols2{
+
+{{col{
+
+<<mgtdList
+	title:'Delegated/Waiting For'
+	startTag:Action
+	tags:'[(Waiting For)] && !Done'
+	view:ActionProj
+	mode:global
+	where:tiddler.getByIndex("Contact").length > 0'
+	group:Contact
+	gView:bold
+	newButtonTags:'Action [(Waiting For)]'
+	>>
+
+}}}
+
+{{col{
+
+<<mgtdList title:'Done' startTag:Action tags:'Done && [(Waiting For)]' view:DoneAction mode:global
+	where:tiddler.getByIndex('Contact').length>0
+	group:Contact
+	gView:bold
+	newButtonTags:'Action Done [(Waiting For)]'
+	>>
+
+}}}
+
+}}}

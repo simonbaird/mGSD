@@ -1,0 +1,207 @@
+!Project
+<!--{{{-->
+<div class="projectcontrols controls controlstint">
+ <div style="float:right;" class="smaller">
+  <span class="label">Realm:</span><span macro="multiSelectTag Realm allowNone:on"></span>
+  <span macro="tag Project"></span><span macro="help Project"></span>
+ </div>
+ <div>
+  <span macro="toggleTag Complete . -"></span>
+  <span class='title' macro='view title'></span>
+  <span macro="miniTag"></span>
+  <span macro="linkToParent Area '[A]'"></span>
+  <span macro="linkToParent Project '[P]'"></span>
+  <span macro="singleToggleTag tag:Starred"></span>
+  [[MonkeyGTDTheme##Subtitle]]
+ </div>
+ <div macro="hideWhenTagged Complete" style="padding-top:0.25em;padding-bottom:0.25em;">
+  <span macro="multiToggleTag ProjectStatus longVersion:on"></span>
+ </div>
+ <div>
+  <div class="floatright" macro="convertToFromTickler"><br/></div>
+  <div class="floatright" macro="deleteAllTagged 'delete project' '' 'delete'"><br/></div>
+  <div class="floatleft"><span class="label">Area:</span><br><span macro="multiSelectTag Area allowNone:on"></span><span macro="linkToParent Area"></span></div>
+  <div class="floatleft"><span class="label">Subproject of</span>:<br><span macro="multiSelectTag Project allowNone:on"></span><span macro="linkToParent Project"></span></div>
+  <div class="floatleft"><span class="label">Associated contact</span>:<br><span macro="multiSelectTag Contact allowNone:on"></span><span macro="linkToParent Contact"></span></div>
+  <div class="clearboth"></div>
+ </div>
+</div>
+<!--}}}-->
+
+!Action
+<!--{{{-->
+<div class="actioncontrols controls controlstint">
+ <div style="float:right;" class="smaller">
+  <span class="label">Realm:</span><span macro="multiSelectTag Realm allowNone:on"></span>
+  <span macro="tag Action"></span><span macro="help Action"></span>
+ </div>
+ <div>
+  <span macro="toggleTag Done . -"></span>
+  <span class='title' macro='view title'></span>
+  <span macro="miniTag"></span>
+  <span macro="linkToParent Project '[P]'"></span>
+  <span macro="singleToggleTag tag:Starred"></span>
+  [[MonkeyGTDTheme##Subtitle]]
+ </div>
+ <div macro="hideWhenTagged Done" style="padding-top:0.25em;padding-bottom:0.25em;">
+  <span macro="multiToggleTag ActionStatus longVersion:on"></span>
+ </div>
+ <div macro="showWhen config.mGTD.getOptChk('MultipleContexts')">
+  <span class="label">Context:</span><br/><span class="unboldLinks" macro="groupOfSingleToggleTags Context useCheckbox:yes"></span>
+ </div>
+ <div>
+  <div class="floatright" macro="convertToFromTickler"><br/></div>
+  <div class="floatright" macro="convertActionToSubProj"><br/></div>
+  <div class="floatright" macro="convertActionToReference"><br/></div>
+  <div class="floatleft" macro="else"><span class="label">Context:</span><br/><span macro="multiSelectTag Context allowNone:on"></span><span macro="linkToParent Context"></span></div>
+  <div class="floatleft"><span class="label">Project:</span><br/><span macro="multiSelectTag Project allowNone:on"></span><span macro="linkToParent Project"></span></div>
+  <div macro="hideWhen tiddler.hasParent('Project')" class="floatleft"><span class="label">Area:</span><br><span macro="multiSelectTag Area allowNone:on"></span><span macro="linkToParent Area"></span></div>
+  <div class="floatleft">
+   <span macro="hideWhenTaggedAny 'Waiting For' 'Done'" class="label">Associated contact:</span>
+   <span macro="else" class="label">Delegated to/waiting on:</span><br>
+   <span macro="multiSelectTag Contact allowNone:on"></span><span macro="linkToParent Contact"></span>
+  </div>
+  <br style="clear:left"/>
+  <div class="floatleft">
+    <span class="label">Depends on:</span><br/><span macro="multiSelectTag Action allowNone:on"></span><span macro="linkToParent Action"></span>
+   <!-- fixme. broken in 2.4.1 but works in 2.4.3?: <span macro="newSavedTiddler title:'new dependent action' label:'+ dependent action' tag:{{'Action Future [['+config.macros.mgtdList.getRealm()+']] [['+tiddler.getParent('Context')+']] [['+tiddler.getParent('Project')+']] [['+tiddler.title +']]'}}"></span> -->
+  </div>
+  <div class="clearboth"></div>
+ </div>
+</div>
+<!--}}}-->
+
+!Tickler
+<!--{{{-->
+<div class="ticklercontrols controls controlstint">
+ <div style="float:right;" class="smaller">
+  <span class="label">Realm:</span><span macro="multiSelectTag Realm allowNone:on"></span>
+  <span macro="tag Tickler"></span><span macro="help Tickler"></span>
+ </div>
+ <div>
+  <span macro="showWhen tiddler.tags.contains('Once') || !tiddler.hasParent('TicklerRepeatType')">
+   <span macro="toggleTag Actioned . -"></span>
+  </span>
+  <span macro="showWhenTagged 'Daily'"   ><span macro="addDay"></span></span>
+  <span macro="showWhenTagged 'Weekly'"  ><span macro="addWeek"></span></span>
+  <span macro="showWhenTagged 'Monthly'" ><span macro="addMonth"></span></span>
+  <span macro="showWhenTagged 'Yearly'"  ><span macro="addYear"></span></span>
+  <span class='title' macro='view title'></span>
+  <span macro="linkToParent Area '[A]'"></span>
+  <span macro="linkToParent Project '[P]'"></span>
+  <span macro="singleToggleTag tag:Starred"></span>
+  [[MonkeyGTDTheme##Subtitle]]
+ </div>
+ <div macro="hideWhenTagged Actioned" style="padding-top:0.25em;padding-bottom:0.25em;">
+  <span macro="multiToggleTag TicklerRepeatType longVersion:on"></span>
+ </div>
+ <div>
+  <div class="floatleft"><span class="label">Tickler date:</span><br/><span macro="dateChooser"></span></div>
+  <div class="floatleft buttonsLikeLinks"><br>
+   <span macro="addDay"></span>
+   <span macro="addWeek"></span>
+   <span macro="addMonth"></span>
+   <span macro="addYear"></span>
+  </div>
+  <div class="clearboth"></div>
+ </div>
+ <div>
+  <div class="floatright" macro="convertToFromTickler"><br/></div>
+  <div class="floatleft"><span class="label">Project:</span><br/><span macro="multiSelectTag Project allowNone:on"></span><span macro="linkToParent Project"></span></div>
+  <div macro="hideWhen tiddler.hasParent('Project')" class="floatleft"><span class="label">Area:</span><br><span macro="multiSelectTag Area allowNone:on"></span><span macro="linkToParent Area"></span></div>
+  <div class="floatleft"><span class="label">Associated contact</span>:<br><span macro="multiSelectTag Contact allowNone:on"></span><span macro="linkToParent Contact"></span></div>
+  <div class="clearboth"></div>
+ </div>
+</div>
+<!--}}}-->
+
+!View
+<!--{{{-->
+<div class="viewcontrols controls">
+ <div>
+  <span class='title' macro='view title'></span><span macro="help"></span>
+ </div>
+</div>
+<!--}}}-->
+
+!Context
+<!--{{{-->
+<div class="contextcontrols controls">
+ <div style="float:right;" class="smaller">
+  <span macro="tag Context"></span><span macro="help Context"></span>
+ </div>
+ <div>
+  <span class='title' macro='view title'></span>
+  <span macro="miniTag"></span>
+  <span macro="singleToggleTag tag:Starred"></span>
+ </div>
+</div>
+<!--}}}-->
+
+!Area
+<!--{{{-->
+<div class="areacontrols controls">
+ <div style="float:right;" class="smaller">
+  <span class="label">Realm:</span><span macro="multiSelectTag Realm allowNone:on"></span>
+  <span macro="tag Area"></span><span macro="help Area"></span>
+ </div>
+ <div>
+  <span class='title' macro='view title'></span>
+  <span macro="miniTag"></span>
+  <span macro="singleToggleTag tag:Starred"></span>
+ </div>
+</div>
+<!--}}}-->
+
+!Realm
+<!--{{{-->
+<div class="realmcontrols controls">
+ <div style="float:right;" class="smaller">
+  <span macro="tag Realm"></span><span macro="help Realm"></span>
+ </div>
+ <div>
+  <span class='title' macro='view title'></span>
+ </div>
+</div>
+<!--}}}-->
+
+!Reference
+<!--{{{-->
+<div class="referencecontrols controls controlstint">
+ <div style="float:right;" class="smaller">
+  <span class="label">Realm:</span><span macro="multiSelectTag Realm allowNone:on"></span>
+  <span macro="tag Reference"></span><span macro="help Reference"></span>
+ </div>
+ <div>
+  <span class='title' macro='view title'></span>
+  <span macro="linkToParent Project '[P]'"></span>
+  <span macro="singleToggleTag tag:Starred"></span>
+  [[MonkeyGTDTheme##Subtitle]]
+ </div>
+ <div>
+  <div class="floatleft"><span class="label">Project:</span><br><span macro="multiSelectTag Project allowNone:on"></span><span macro="linkToParent Project"></span></div>
+  <div macro="hideWhen tiddler.hasParent('Project')" class="floatleft"><span class="label">Area:</span><br><span macro="multiSelectTag Area allowNone:on"></span><span macro="linkToParent Area"></span></div>
+ </div>
+ <div class="clearboth"></div>
+ <div style="padding-top:1em;">
+  Double click or click "edit" to edit. Use "new here" to make sub item.
+ </div>
+</div>
+<!--}}}-->
+
+!Contact
+<!--{{{-->
+<div class="contactcontrols controls">
+ <div style="float:right;" class="smaller">
+  <span class="label">Realm:</span><span macro="multiSelectTag Realm allowNone:on"></span>
+  <span macro="tag Contact"></span><span macro="help Contact"></span>
+ </div>
+ <div>
+  <span class='title' macro='view title'></span>
+  <span macro="miniTag"></span>
+  <span macro="singleToggleTag tag:Starred"></span>
+  [[MonkeyGTDTheme##Subtitle]]
+ </div>
+</div>
+<!--}}}-->
+

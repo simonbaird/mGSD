@@ -1,0 +1,5 @@
+<<mgtdList title:'Starred Next Actions by Context' startTag:Action tags:'Next && !Done && Starred' view:ActionProj mode:global
+	group:Context
+	newButtonTags:'Action Next Starred'
+	where:tiddler.hasActiveProject()
+>>

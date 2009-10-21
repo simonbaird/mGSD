@@ -1,0 +1,5 @@
+<<mgtdList title:'Next Actions by Context' startTag:Action tags:'Next && !Done' view:ActionProj mode:global
+	group:Context
+	newButtonTags:'Action Next'
+	where:tiddler.hasActiveProject()
+>>

@@ -1,0 +1,6 @@
+<<mgtdList title:'Next Actions by Contact' startTag:Action tags:'Next && !Done' view:ActionProj mode:global
+	group:Contact
+	gView:bold
+	newButtonTags:'Action Next'
+	where:tiddler.hasActiveProject()
+>>

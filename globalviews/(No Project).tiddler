@@ -1,0 +1,4 @@
+<<mgtdList startTag:Action title:'Actions with no project' tags:'!Done' view:DoneAction mode:global
+	where:tiddler.hasNoParent('Project')
+	>>
+

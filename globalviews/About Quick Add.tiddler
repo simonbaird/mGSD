@@ -1,0 +1,33 @@
+Enter projects and actions here. Click 'create these items' to create them.
+Example usage:
+{{{
+Paint House
+.Buy ladder and brushes|Errand
+.Choose colours|Home|W
+}}}
+By default actions are next actions. 
+Specify W or F to make them future or Waiting For. You can create multiple projects and project-less actions.
+
+You can also specify area for projects. Order dosn't matter, as there can only be one uniquely named tiddler. The following is valid:
+{{{
+Paint House|Home Maintenance|Personal
+.Buy ladder and brushes|Errand
+.Choose colours|W|Home
+}}}
+To specify multiple projects and tasks, along with project-less actions, the below is an example of one way create two projects with tasks, and then a stand alone action.
+{{{
+Clean up yard|Personal|Home Maintenance
+.Pick up sticks|Weekend
+.Bag all the sticks|Weekend
+Check out latest SAN offerings|Research|Work
+.Read up on all major vendors offerings|Reading
+.Call Doug for opinion|Call
+.Check budget|Work|F
+
+.Call Tara about tickets
+}}}
+If you want to add an action to an already existing project, you can specify the project name to do so:
+{{{
+.Pick up lumber at Home Depot|Build toolshed|Errand
+}}}
+

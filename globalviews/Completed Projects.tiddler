@@ -1,0 +1,12 @@
+<<mgtdList
+	title:'Complete'
+	mode:global
+	startTag:Project
+	tags:'Complete'
+	view:ProjectComplete
+	group:day
+	gView:bold
+	gSort:-title
+	newButtonTags:'Project Complete'
+	sort:-modified
+	>>

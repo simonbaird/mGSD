@@ -1,0 +1,45 @@
+Fix these manually. These have either no realm or a different realm to their parent.
+{{cols2{
+
+{{col{
+
+<<mgtdList
+	title:'Action/Project mismatch'
+	startTag:Action
+	view:star
+	mode:global
+	ignoreRealm:yes
+	where:"tiddler.realmMismatchWithParent('Project')"
+	group:Project
+	gView:bold
+	>>
+
+}}}
+
+{{col{
+
+<<mgtdList
+	title:'Projects/Area mismatch'
+	startTag:Project
+	view:star
+	mode:global
+	ignoreRealm:yes
+	where:"tiddler.realmMismatchWithParent('Area')"
+	group:Area
+	gView:bold
+	>>
+
+
+<<mgtdList
+	title:'Subproject/parent project mismatch'
+	startTag:Project
+	view:star
+	mode:global
+	ignoreRealm:yes
+	where:"tiddler.realmMismatchWithParent('Project')"
+	>>
+
+
+}}}
+
+}}}

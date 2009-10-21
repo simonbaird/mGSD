@@ -1,0 +1,44 @@
+
+{{cols2{
+
+{{col{
+
+
+<<mgtdList
+    title:'Ticklers Requiring Action Grouped'
+    startTag:Tickler
+    tags:'!Actioned'
+    view:Tickler
+    group:Contact
+    gView:bold
+    mode:global
+    newButtonTags:'Tickler Enabled Once'
+    where:'tiddler.ticklerIsActive()'
+    sort:'tickleDate'
+    dontShowEmpty:yes
+    ignoreRealm:{{config.mGTD.getOptChk('AlertsIgnoreRealm')?'yes':''}}
+>>
+
+}}}
+
+{{col{
+
+<<mgtdList
+    title:'Upcoming Ticklers Grouped'
+    startTag:Tickler
+    tags:'!Actioned'
+    view:Tickler
+    group:Contact
+    gView:bold
+    mode:global
+    newButtonTags:'Tickler Enabled Once'
+    where:'!tiddler.fields.mgtd_date || !tiddler.ticklerIsActive()'
+    sort:'tickleDate'
+    dontShowEmpty:yes
+    ignoreRealm:{{config.mGTD.getOptChk('AlertsIgnoreRealm')?'yes':''}}
+>>
+
+
+}}}
+
+}}}

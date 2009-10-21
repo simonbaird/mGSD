@@ -1,0 +1,755 @@
+|Name|MonkeyGTD|
+|Description|MonkeyGTD Theme|
+|PageTemplate|MonkeyGTDTheme##PageTemplate|
+|StyleSheet|MonkeyGTDTheme##StyleSheet|
+|ViewTemplate|MonkeyGTDTheme##ViewTemplate|
+|EditTemplate|MptwTheme##EditTemplate|
+
+!ViewTemplate
+<!--{{{-->
+<div macro="showWhen tiddler.tags.containsAny(config.mGTD.specialTags)">
+	[[MonkeyGTDTheme##ViewTemplateToolbar]]
+	<div class='titleContainer viewer'>[[TitleButtonsSelector]]</div>
+	<div macro="showWhenTaggedAny Reference View">
+		<!--- just make it look like a normal tiddler --->
+		<div class='viewer' macro='view text wikified'></div>
+	</div>
+	<div macro="else">
+		<div macro="showWhen tiddler.text != ''">
+			<div class='viewer'>Notes:</div>
+			<div class='viewer postityellow' macro='view text wikified'></div>
+		</div>
+	</div>
+	<div class='viewer'>[[DashboardSelector]]</div>
+</div>
+<div macro="hideWhen tiddler.tags.containsAny(config.mGTD.specialTags)">
+	<!--- use standard template for non gtd tiddlers --->
+	[[MptwTheme##ViewTemplate]]
+</div>
+<!--}}}-->
+
+!ViewTemplateToolbar
+<!--{{{-->
+<!-- it's identical to Mptw at present except add Reference tag to new journal and new tiddler. will probably tweak it more later. -->
+<div class='toolbar'>
+	<span macro="showWhenTagged systemConfig">
+		<span macro="toggleTag systemConfigDisable . '[[disable|systemConfigDisable]]'"></span>
+	</span>
+	<span macro="showWhenTagged systemTheme"><span macro="applyTheme"></span></span>
+	<span macro="showWhenTagged systemPalette"><span macro="applyPalette"></span></span>
+	<span macro="showWhen tiddler.tags.contains('css') || tiddler.title == 'StyleSheet'"><span macro="refreshAll"></span></span>
+	<span style="padding:1em;"></span>
+	<span macro='toolbar closeTiddler closeOthers +editTiddler deleteTiddler > fields syncing permalink references jump'></span>
+	<span macro='newHere label:"new here" tag:Reference'></span>
+	<span macro='newJournalHere {{config.mGTD.getOptTxt("newjournaldateformat")?config.mGTD.getOptTxt("newjournaldateformat"):"DD-mmm-YY 0hh:0mm"}} tag:Reference'></span>
+</div>
+<!--}}}-->
+
+!Subtitle
+<!--{{{-->
+<span class='subtitle'>
+	Updated
+	<span macro='view modified date {{config.mptwDateFormat?config.mptwDateFormat:"MM/0DD/YY"}}'></span>
+	(<span macro='message views.wikified.createdPrompt'></span>
+	<span macro='view created date {{config.mptwDateFormat?config.mptwDateFormat:"MM/0DD/YY"}}'></span>)
+</span>
+<!--}}}-->
+
+!PageTemplate
+<!--{{{-->
+<div class='header' macro='gradient vert [[ColorPalette::PrimaryLight]] [[ColorPalette::PrimaryMid]]'>
+	<div style="float:right" id='searchBox' macro="search Search..."></div>
+	<div class='header2'>MonkeyGTD <span style="font-size:75%;font-weight:normal;" macro="mgtdVersion"></span></div>
+</div>
+<div macro='gradient vert [[ColorPalette::PrimaryMid]] [[ColorPalette::PrimaryDark]]'>
+	<div style="float:right" id="toggleSideBar"><span macro="toggleSideBar"></span></div>
+	<div class='mtoolbar'>
+	<div>
+	<span class="label">REALM</span><span id='arealmSelector' macro="groupOfSingleToggleTags tag:Realm title:MgtdSettings refresh:page"></span>
+	<span id='ticklerAlert' refresh='content' tiddler='TicklerAlert' force="true"></span>
+	<span id='newButtons' refresh='content' tiddler='NewButtons'></span>
+	</div>
+	</div>
+</div>
+<div id='mainMenu' refresh='content' tiddler='MainMenu'></div>
+<div id='sidebar'>
+	<div id='sidebarOptions'>
+		<span macro="saveChanges"></span>
+		<span macro="closeAll"></span>
+		<span macro="showWhen store.tiddlerExists('TspotSidebar')||store.isShadowTiddler('TspotSidebar')"><span refresh='content' tiddler='TspotSidebar'></span></span>
+		<span macro="showWhen store.tiddlerExists('MgtdSidebarExtra')"><span refresh='content' tiddler='MgtdSidebarExtra'></span></span>
+	</div>
+	<div id='sidebarTabs' refresh='content' force='true' tiddler='MGTDSidebar'></div>
+</div>
+<div id='displayArea'>
+	<div id='messageArea'></div>
+	<div id='tiddlerDisplay'></div>
+</div>
+<!--}}}-->
+
+!SidebarMenus
+<!--{{{-->
+<!--- not using --->
+<div id='twsidebar' macro="showWhen store.fetchTiddler('MgtdSettings').tags.contains('TW')">
+	<div id='sidebarOptions' refresh='content' tiddler='SideBarOptions'></div>
+	<div id='sidebarTabs' refresh='content' force='true' tiddler='SideBarTabs'></div>
+</div>
+<div id='twsidebar' macro="hideWhen store.fetchTiddler('MgtdSettings').tags.contains('TW')">
+	<div id='sidebarOptions'>
+		<span macro="showWhen store.tiddlerExists('TspotSidebar')||store.isShadowTiddler('TspotSidebar')"><span refresh='content' tiddler='TspotSidebar'></span></span>
+		<span refresh='content' tiddler='CommonMenu'></span>
+	</div>
+</div>
+<div id='monkeygtdsidebar' macro="showWhen store.fetchTiddler('MgtdSettings').tags.contains('Do Work')">
+	<div class="menu" refresh='content' tiddler='DoWorkMenu'></div>
+</div>
+<div id='monkeygtdsidebar' macro="showWhen store.fetchTiddler('MgtdSettings').tags.contains('Review')">
+	<div class='menu' refresh='content' tiddler='ReviewMenu'></div>
+</div>
+<div id='monkeygtdsidebar' macro="showWhen store.fetchTiddler('MgtdSettings').tags.contains('Process Inbox')">
+	<div class='menu' refresh='content' tiddler='ProcessInboxMenu'></div>
+</div>
+<!---
+<div id='monkeygtdsidebar' macro="showWhen store.fetchTiddler('MgtdSettings').tags.contains('Collect Items')">
+	<div class='menu' refresh='content' tiddler='CollectItemsMenu'></div>
+</div>
+--->
+<div id='monkeygtdsidebar' macro="showWhen store.fetchTiddler('MgtdSettings').tags.contains('Config')">
+	<div class='menu' refresh='content' tiddler='ConfigMenu'></div>
+</div>
+<!--}}}-->
+
+!Printing3x5Styles
+/*{{{*/
+@media print {
+
+.cols3 .col {width: 100%; float:none;}
+.cols2 .col {width: 100%; float:none;}
+
+.titleContainer {text-align:center;}
+
+/* LAYOUT ELEMENTS
+========================================================== */
+*
+{
+ margin: 0;
+ padding: 0;
+
+}
+
+body {
+ background: #fff;
+ color: #000;
+ font-size: 6.2pt;
+ font-family: "Lucida Grande", "Bitstream Vera Sans", Helvetica,
+Verdana, Arial, sans-serif;
+
+}
+
+img {
+ max-width: 2.5in;
+ max-height: 4.5in;
+
+}
+
+.tiddler {
+ margin: 0 0 2em 0;
+ border-top: 1px solid #000;
+ page-break-before: always;
+
+}
+
+.tiddler:first-child {
+ page-break-before: avoid;
+
+}
+
+p, blockquote, ul, li, ol, dt, dd, dl, table
+{
+ margin: 0 0 .3em 0;
+
+}
+
+h1, h2, h3, h4, h5, h6
+{
+ margin: .2em 0;
+
+}
+
+h1
+{
+ font-size: 1.5em;
+
+}
+
+h2
+{
+ font-size: 1.3em;
+
+}
+
+h3
+{
+ font-size: 1.25em;
+
+}
+
+h4
+{
+ font-size: 1.15em;
+
+}
+
+h5
+{
+ font-size: 1.1em;
+
+}
+
+blockquote
+{
+ margin: .6em;
+ padding-left: .6em;
+ border-left: 1px solid #ccc;
+
+}
+
+ul
+{
+ list-style-type: circle;
+
+}
+
+li
+{
+ margin: .1em 0 .1em 2em;
+ line-height: 1.4em;
+
+}
+
+table
+{
+ border-collapse: collapse;
+ font-size: 1em;
+
+}
+
+hr {
+ border: none;
+ border-top: dotted 1px #777;
+ height: 1px;
+ color: #777;
+ margin: .6em 0;
+}
+
+}/* end @media print */
+
+/*}}}*/
+
+
+!StyleSheet
+/*{{{*/
+
+[[MptwTheme##StyleSheet]]
+
+
+
+.header2 {
+	background:url(http://randomibis.com/images/monkeygtd/logo-trans.gif) no-repeat -15px 2px transparent;
+	padding:5px;
+	padding-left:80px;
+	color:white;
+	font-size:1.3em;
+	font-weight:bold;
+}
+
+#backstageShow { color:[[ColorPalette::PrimaryLight]] ! important; }
+
+/* the png is superior due to alpha transparency. but IE can't do it */
+/* html>body .header2 {background-image:url(http://randomibis.com/images/monkeygtd/logo-trans.png)} */
+/* try this trick (also firefox only)... */
+html>body .header2 {
+	background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFkAAABxBAMAAABM2hLHAAAAA3NCSVQICAjb4U/gAAAAMFBMVEX///////////////////////////////////////////////////////////////9Or7hAAAAAEHRSTlMAESIzRFVmd4iZqrvM3e7/dpUBFQAAAAlwSFlzAAGaAAABmgABJU9lCwAAABZ0RVh0Q3JlYXRpb24gVGltZQAwMy8xNS8wNszogUoAAAAldEVYdFNvZnR3YXJlAE1hY3JvbWVkaWEgRmlyZXdvcmtzIE1YIDIwMDSHdqzPAAAEIElEQVR4nK1Yz2sTURB+2SZtYm2o+OtS6x7Vg/UgSBVtD16k0Fbw5o/oH1CiHkSM2uKpIJL642wDevLQRlARRFMPejSKoCJIbD1oVXxYq7Umu+Pb3azNzpudpOB3eM2+fkzn+2be5k2FINDydhu1TeK0SELlRINkA/6kAeybjbHj4OFVeyPsDYtDHv1zI8mnPvjR/zTALuTbqmyoTzbk4ECVbNVnJ6z2dJW9WJ+d/C12+5k8rWvLwJyInPXIEmbNOuzilBAxj713AirHWLIBg0KsqOxS5IowzoF9g2MnbLW0LYhxgAX1qY9PvtPhdM0Z8sSl287z+hLMhtc0Na2W4efKx+pGdAK+hiZfyKulONazsKREJX+FJqtKChGRvZPTNZt9Ep6Q7LiTQbO92nFmCZskfDIJ9obfamktr0AtEi3Cl/06OzWjluSvPb9whpfAuqCxi47I1PfJx/gXkYPSvoecN2SvEDvlSzmI2Sr5EvQGd1ybS9YZi6rfOsxOOiJLL7FIDy2WGdxIfVfLEWsUR3HRhk+HK7JZAslWnR9Ak8fa8u01lcnkVPA5wZ1bQx4NbnQukDwPcRsZlZ5h2ElNZI5hh4gMQWEq+EwXpQoDUDfwInGo9DTJ8+B2fi1KOYadQn5FeZH54DMvErd8Jz5etUjglh/mRCaxSLaSbufXoAm477AiFllhyAb2aytXSfdFXYthrl07tUqOMWzcFFFeZC74vDyRdSqJNthKap3Ptis+3v9RpHa8t/5k2JrILNuumki2kstqV+xXHZEoFFtJ7XjzlcSh2EriUHwlcajWZYncyFVS82v4PcPGIiNsJbHImP3fRGp+se2qhcq+YNiaX6URho39ioIZTtb8ChG5y700an510SLfZRxiaxltZ99T5OY50Z8j/JIjFLs1L+J53a8YLTJpX1g5pkSiUCtxZh4ODEFhmxKJQnXNU+TIR7GvTITKPqfYLeryskr3S8vMQ5vt3nKxX1pmHgYycMe5uKNQmv0eMqJbmurijr7e94S26xolEk+N42S7RkbdH5pf8jjF7ij3Oz01jvyKATkrnTcflh2RKFRIJe+L+YwznZjB7R6ykuKBMG8RIrO0JekbMfXS6fmBt+nBJwGgTtgkbgo1+JR7CfqOU47Io3jbuA7WSY180flHhFZJhcgh/b8OTRW4rDqLnP83l+B1MEo0360EDmCRHtY9g3LgRdCxaApCpP+XVfK1E+r5QrmdEuljKDBejxqZdtFCiPSxUy6N101wTRDDUy1qx+tuORUq0o84AZZ/b14/os8VCBE1Xl/996QNTxr6wL7rJ68NTzpU8m9M7yMrsoq1j6DiJY+HJxJqvPZePHVE+ugD58WjDU9h2CRV8nF85Q5FrAhfDuMrdzhU8sDd3hHUEck1zhZiO1Gbv3NR7MzF6giHAAAAAElFTkSuQmCC)
+}
+
+.headerShadow, .headerForeground {
+	padding:0;
+}
+
+.mtoolbar { padding:0.1em; padding-top:0.5em;}
+.mtoolbar .button { margin-left:0.5em; padding:0.2em 0.3em; margin:0.2em 0.3em;  }
+.mtoolbar .button.off {background-color:[[ColorPalette::TertiaryMid]]!important; color:black; font-weight:normal;border-color:[[ColorPalette::PrimaryDark]];}
+.mtoolbar .button.on {background-color:[[ColorPalette::TertiaryLight]]; color:black; border-color:[[ColorPalette::PrimaryDark]];} 
+
+.mtoolbar .button {
+	-moz-border-radius-topleft: 0.5em;
+	-moz-border-radius-topright: 0.5em;
+}
+
+#newButtons { padding-left:3em; }
+#newButtons br { display:none; }
+#newButtons .button { background-color:transparent; color:white; border-color:transparent; }
+
+.txtMGTDMain .tabContents {
+	font-size:120%;
+}
+
+.txtMGTDMore .tabContents {
+	font-size:90%;
+}
+
+.tabContents .sliderButton {
+	font-size:120%;
+	background-color:[[ColorPalette::TertiaryLight]];
+}
+
+
+
+.mtoolbar .label { font-size:80%; color:[[ColorPalette::PrimaryLight]]; padding:0.5em;}
+
+
+#displayArea {
+	margin: 1em 15.7em 0em 1em; /* use the freed up space */
+}
+
+#sidebar, #sidebarOptions
+	width:18em;
+}
+
+#sidebarTabs {
+	width:100%;
+}
+
+#mainMenu { display:none; }
+
+#sidebar .menu a {
+	font-size:140%;
+}
+
+#sidebar .menu ul {
+	padding-left:2em;
+	padding-top:0;
+	margin-top:0;
+}
+#sidebar .menu h1,
+#sidebar .menu h2
+{
+	color:[[ColorPalette::PrimaryDark]];
+	margin:0;
+	padding:0;
+	margin-top:0.25em;
+}
+#sidebar .menu h1 {
+	font-size:180%;
+}
+#sidebar .menu h2 {
+	font-size:140%;
+	margin-left:0.5em;
+}
+
+
+.viewer table.twocol,
+.viewer table.threecol {
+	border-style:none ! important;
+	border-collapse:no-collapse;
+	width:100%;
+	padding:0; margin:0;
+}
+
+.viewer table.twocol td,
+.viewer table.threecol td {
+	border-style:none ! important;
+	vertical-align:top;
+	padding-right:1em;
+}
+
+.viewer table.twocol tr,
+.viewer table.threecol tr {
+	border-style:none ! important;
+}
+
+.viewer table.twocol td {
+	width:50%;
+}
+.viewer table.threecol td {
+	width:33%;
+}
+
+
+.mgtdList h1 {
+	border-bottom:1px solid #aaa;
+	color:#444;
+	font-size:110%;
+	margin:0;
+	padding:0;
+}
+
+.mgtdList h1 br {
+	display:none;
+}
+
+.mgtdList h1 .button {
+	border-color:transparent;
+	font-weight:bold;
+	font-size:110%;
+}
+
+.mgtdList h1 .button:hover {
+	border-color:#999;
+}
+
+.mgtdList h2 {
+	border-style:none!important;
+	font-size:100%;
+	margin:0; padding:0;
+	margin-top:0.7em;
+	margin-left:-0.2em;
+	color:#444;
+}
+
+.mgtdList h2 .button {
+	border-style:none!important;
+}
+
+.mgtdList {
+	padding:0;
+	padding-right:1em;
+}
+
+.mgtdList .innerList {
+	padding:0.5em 1em 0em 1em;
+}
+
+.tabContents .sliderPanel {
+	margin-left:2em;
+}
+.txtMGTDMain .mgtdList .innerList {
+	font-size:80%;
+	padding-left:0em;
+}
+
+.tabContents li {
+	margin-left:2em;
+}
+
+
+.mgtdList .plain { padding-left:1em; }
+
+#sidebar .mgtdList .plain { padding-left:0em; }
+#sidebar .tabContents .sliderPanel { margin-left:1em; }
+#sidebar .sliderPanel .mgtdList .plain { padding-left:0em; }
+#sidebar .mgtdList .noneHeading .tiddlyLink { font-weight:normal!important; }
+
+/* TODO why not just make it all of them... */
+.mgtdList .action .tiddlyLinkExisting,
+.mgtdList .plain .tiddlyLinkExisting,
+.mgtdList .tickler .tiddlyLinkExisting,
+.mgtdList .project .tiddlyLinkExisting
+{
+	font-weight: normal ! important;
+}
+
+/* TODO why not just make it all of them... */
+.mgtdList .action .tiddlyLink,
+.mgtdList .plain .tiddlyLink,
+.mgtdList .tickler .tiddlyLink,
+.mgtdList .project .tiddlyLink
+{
+	font-weight: normal ! important;
+}
+
+.mgtdList .button {
+	font-weight: normal;
+	margin:1px;
+}
+
+body {
+	background: [[ColorPalette::TertiaryLight]];
+}
+
+.title { font-size:150%; color:black; }
+
+#monkeygtdsidebar h1 {
+	font-size:120%; color:green;
+}
+
+.none { color:[[ColorPalette::TertiaryMid]]; font-size:90%; font-style:italic; }
+
+.postityellow {
+	background-color:#ffa;
+	border:2px solid #dd8;
+	padding-left:1em;
+	padding-bottom:0.5em;
+}
+.postityellow h1,
+.postityellow h2,
+.postityellow h3,
+.postityellow h4
+{
+	border-style:none;
+}
+
+#sidebar .sliderButton { font-weight:bold; padding-left:0.25em; }
+#sidebar .sliderPanel ul { margin-bottom:0px; }
+#sidebar .sliderPanel li { font-weight:medium; font-size:90%; }
+
+#sidebar .mgtdList .innerList .tiddlyLink {
+	font-size:120%;
+}
+
+.innerList h3 {
+    font-size:80%;
+    margin:0; padding:0;
+    
+}
+
+#newButtons .sliderPanel {
+	background-color:[[ColorPalette::TertiaryMid]];
+	margin-top:4px;
+	padding:1em;
+	border-top:2px solid #444;
+	border-bottom:2px solid #444;
+}
+
+#newButtons .sliderPanel br {
+	display:inline;
+}
+
+#newButtons .sliderPanel .button {
+	font-weight:bold;
+	color:black
+	border:1px solid black;
+	background-color:#666;
+}
+
+.piBox {
+	width:95%;
+	height:8em;
+}
+
+.smaller { font-size: 85%; }
+
+.scroll10 .innerList {
+	overflow:auto;
+	height:12em;
+}
+
+.dateBox {
+	/* TODO make prettier */
+	font-weight:medium; font-size:120%; margin:0.1em; background-color:#ffd;
+	border:1px solid #ccc;
+	background-color:#fff;
+	text-align:center;
+	width:8em;
+}
+.mgtdList .dateBox { font-weight:medium; font-size:100%; }
+
+#ticklerAlert br { display:none; }
+
+.ticklerAlert { padding-left:3em; }
+.ticklerAlert .tiddlyLink { color:white; }
+
+/* give a little more space for menu */
+#sidebar { width: 21em; /* instead of 16em */ }
+#displayArea { margin-right:20.7em; /* instead of 15.7em */ }
+#sidebarTabs .tabContents { width:94%; /*16.5em;  instead of 15em */ } /* this seems silly */
+
+#messageArea .help { width:40em; font-size:90%; }
+
+#searchBox {
+	position:absolute;
+	top: 2px;
+	right: 7em;
+	z-index:200;
+	/* make room for backstage link? */
+}
+#searchBox .button {
+	display:none;
+}
+
+.tabContents .button {
+	display:block;
+}
+.tabContents .li .button {
+	display:inline; /* hack to make for quickopentags in tabTags look right... */
+}
+.tabContents li .button {
+	display:inline; /* hack to make for quickopentags in tabTags look right... */
+}
+
+.txtMGTDMain .tab {
+	font-size:120%;
+}
+
+.projLink .tiddlyLinkExisting, .projLink {
+	font-weight:normal;
+	color:[[ColorPalette::TertiaryDark]];
+}
+
+.projLinkFull .tiddlyLinkExisting, .projLinkFull {
+	font-weight:normal;
+	color:[[ColorPalette::TertiaryDark]];
+	font-size:90%;
+}
+
+/* ============= new div based columns ================= */
+.col {
+  float: left;
+  vertical-align:top;
+}
+
+.cols3, .cols2 {
+	overflow: auto; /* contains floats. tnx FND */
+}
+
+/* IE not doing these right :( */
+/* .cols3>br, .col>br { display:none; } */
+
+/* so try this instead. it's annoying and will mean you have trouble 
+with brs in non-mgtdlist content. .normal might help */
+.cols2 br, .cols3 br  { display:none; }
+.mgtdList br, .normal { display:block!important; }
+.col .mgtdList { margin-bottom:1.5em; } /* since we're no longer seeing the brs... */
+
+.cols3 .col {
+  width: 33%;
+}
+.cols2 .col {
+  width: 49%; /* 50% makes IE put them under each other */
+}
+.clear {
+  clear: left;
+}
+/* ============= */
+
+#toggleSideBar {
+	margin-top:0.5em;
+	margin-right:0.5em;
+}
+.button.HideSideBarButton {
+	color:[[ColorPalette::PrimaryLight]];
+	border-style:none;
+	font-weight:bold;
+	font-size:80%;
+	padding:0em 1em;
+	background-color:[[ColorPalette::PrimaryMid]];
+	-moz-border-radius: 0.5em;
+}
+
+/* applicable for any printing. (moved from the 3x5 section) */
+@media print {
+
+	.viewer .tiddlyLink,
+	.mgtdList .tiddlyLink,
+	.tiddlyLink
+	  { color:black ! important; }
+
+	#sidebar, .mtoolbar, .header2, #toggleSideBar, #backstageArea,
+	#backstageButton, #searchBox, .subtitle, .button
+	  {display: none !important;}
+
+	#displayArea {margin: 0;}
+	#contentWrapper .chkOptionInput {border:0; width:0.25cm;}
+	.titleContainer {border-bottom: 1px dotted #000;}
+
+	.scroll10 .innerList { height:auto; overflow:visible; }
+
+}
+
+
+.controls {
+	margin: auto;
+	margin:0; padding:0;
+}
+.controls tr, .controls td, .controls {
+	border-style:none!important;
+	border-collapse:no-collapse;
+}
+
+.controls {
+	clear:right;
+	padding:0.5em;
+	margin-top:1em;
+	padding-bottom:0.5em;
+}
+
+.controlstint {
+	background-color:#f0f0f0;
+	border:1px solid #ccc!important; 
+}
+
+.toolbar .button {
+	border-style:none!important;
+}
+
+.controls .subtitle {
+	margin-left:0;
+	padding-left:0;
+}
+
+.controls .button {
+	background-color:#fff;
+}
+
+.controls .label {
+	color:#888; font-size:90%;
+}
+
+.controls .floatleft {
+	padding-right:1em;
+	float:left;
+}
+
+.controls .floatright {
+	padding-left:1em;
+	float:right;
+}
+
+
+.controls .clearleft { clear:left; }
+.controls .clearright { clear:right; }
+.controls .clearboth { clear:both; }
+
+.controls .button.on {
+	background-color:#555; border-style:none!important;
+}
+
+.controlstint .button.Starred.off,
+.controlstint .button.Starred.on
+{ background-color:#f0f0f0; border-style:none!important;}
+
+.unboldLinks .tiddlyLink {
+	font-weight:normal;
+}
+
+.smaller select { font-size:90%; }
+
+.buttonsLikeLinks .button {
+	border-style:none!important;
+	background:transparent;
+	color:#008;
+}
+
+.buttonsLikeLinks .button:hover {
+	text-decoration:underline;
+}
+
+.deleteTiddlerButton {
+	color: #a66; font-weight:bold; margin-right:0.4em; margin-left:0.1em; 
+}
+
+.tiny {
+	font-size:80%;  /* lazy */
+}
+
+/* make the icon fit in a bit better */
+.showNotesIcon img {
+	vertical-align:middle;
+	margin-right: 1px;
+}
+
+/* for user styles */
+[[StyleSheet]]
+
+/*}}}*/
+

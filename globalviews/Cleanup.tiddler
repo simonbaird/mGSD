@@ -1,0 +1,30 @@
+!!Actions
+Done actions older than 14 days.  <<deleteAllTagged 'Delete old actions' 'Action' '' 'Done' 'tiddler.olderThanDays(14)'>>
+<<mgtdList title:'Done actions older than 14 days'
+	view:DoneAction
+	mode:global
+	sort:-modified
+	startTag:Action
+	tags:'Done'
+	where:'tiddler.olderThanDays(14)'
+	>>
+!!Ticklers
+Inactive ticklers older than 14 days.  <<deleteAllTagged 'Delete old ticklers' 'Tickler' '' 'Actioned' 'tiddler.olderThanDays(14)'>>
+<<mgtdList title:'Inactive ticklers older than 14 days'
+	startTag:Tickler
+	tags:'Actioned'
+	view:Tickler
+	mode:global
+	sort:-tickleDate
+	where:'tiddler.olderThanDays(14)'
+	>>
+!!Projects
+Completed projects older than 14 days. (Delete individually).
+<<mgtdList title:'Completed projects older than 14 days'
+	mode:global
+	sort:-modified
+	startTag:Project
+	tags:'Complete'
+	view:ProjectComplete
+	where:'tiddler.olderThanDays(14)'
+	>>

@@ -1,0 +1,55 @@
+(Contributed by Ken Mankoff)
+{{cols2{
+
+
+{{col{
+
+<<mgtdList startTag:Action title:'Next' tags:'Next && !Done'
+view:Action mode:global
+       group:Project
+       gView:bold
+       newButtonTags:'Action Next'
+       where:tiddler.hasActiveProject()
+       >>
+
+<<mgtdList startTag:Action title:'Waiting' tags:'[(Waiting For)] && !
+Done' view:Action mode:global
+       group:Project
+       gView:bold
+       where:tiddler.hasActiveProject()
+       newButtonTags:'Action [(Waiting For)]'
+       >>
+
+
+}}}
+
+{{col{
+
+<<mgtdList title:'Starred Actions' startTag:Starred tags:'Action && !
+Done' view:ActionProj mode:global
+       group:ActionStatus
+       gView:bold
+       newButtonTags:'Starred Action'
+       >>
+
+<<mgtdList title:'Starred Projects' startTag:Starred tags:'Project && !
+Complete' view:Project mode:global
+       group:ProjectStatus
+       gView:bold
+       newButtonTags:'Starred Project'
+       >>
+
+<<mgtdList title:'Other Starred Items' startTag:Starred tags:'!Project
+&& !Action' view:star mode:global
+       group:GTDComponent
+       gView:bold
+       newButtonTags:'Starred'
+       >>
+
+!!! Last 30 Modifications
+<<timeline "modified" "30" "ddd, YYYY-0MM-0DD">>
+
+}}}
+
+}}}
+

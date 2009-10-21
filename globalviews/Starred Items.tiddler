@@ -1,0 +1,39 @@
+
+{{cols2{
+
+{{col{
+
+<<mgtdList title:'Starred Actions' startTag:Starred tags:'Action && !Done' view:ActionProj mode:global
+	group:ActionStatus
+	gView:bold
+	newButtonTags:'Starred Action'
+	>>
+
+<<mgtdList title:'Starred Done Actions' startTag:Starred tags:'Done' view:DoneAction mode:global
+	newButtonTags:'Starred Action Done'
+	>>
+
+}}}
+
+{{col{
+
+<<mgtdList title:'Starred Projects' startTag:Starred tags:'Project && !Complete' view:Project mode:global
+	group:ProjectStatus
+	gView:bold
+	newButtonTags:'Starred Project'
+	>>
+
+<<mgtdList title:'Completed Projects' startTag:Starred tags:'Project && Complete' view:ProjectComplete mode:global
+	newButtonTags:'Starred Project Complete'
+	>>
+
+<<mgtdList title:'Other Starred Items' startTag:Starred tags:'!Project && !Action' view:star mode:global
+	group:GTDComponent
+	gView:bold
+	newButtonTags:'Starred'
+	>>
+
+}}}
+
+
+}}}

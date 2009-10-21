@@ -1,0 +1,27 @@
+[[Projects Dashboard]]
+[[Projects Dashboard by Area]]
+[[Action Dashboard by Project]]
+[[Active Projects With No Next Action]]
+[[Someday Projects With No Tickler]]
+[[Completed Projects]]
+[[Done Actions]]
+[[SomedayMaybe and Future]]
+[[Delegated Tasks Dashboard]]
+[[Cleanup]]
+[[Mismatched Realms]]
+[[Subprojects]]
+
+<slider+ Areas>
+<<mgtdList startTag:Project tags:'Active && !Complete' groupCountOnly:yes group:Area gView:plain>>
+</slider>
+<slider All areas>
+<<mgtdList startTag:Area>>
+</slider>
+
+{{tiny{
+<slider Advanced>
+[[modify menu|ReviewMenu]]
+[[GTDComponent]]
+</slider>
+}}}
+

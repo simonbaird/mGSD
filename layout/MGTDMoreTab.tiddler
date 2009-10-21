@@ -1,0 +1,5 @@
+<<tabs txtMGTDMore
+	"Timeline" "Timeline" TabTimeline
+	"MGTD" "Configuration Options" ConfigMenu
+	"TW" "TiddlyWiki SideBar" TWSideBar
+	>>

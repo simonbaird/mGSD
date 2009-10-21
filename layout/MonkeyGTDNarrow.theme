@@ -1,0 +1,29 @@
+|Name|MonkeyGTD Narrow|
+|Description|MonkeyGTD Theme for Narrow Screens|
+|PageTemplate|MonkeyGTDTheme##PageTemplate|
+|StyleSheet|MonkeyGTDNarrow##StyleSheet|
+|ViewTemplate|MonkeyGTDTheme##ViewTemplate|
+|EditTemplate|MptwTheme##EditTemplate|
+
+!StyleSheet
+/*{{{*/
+
+[[MonkeyGTDTheme##StyleSheet]]
+
+/* give a little less space for menu */
+#sidebar { width: 16em; /* instead of 16em */ }
+#displayArea { margin-right:15.7em; /* instead of 15.7em */ }
+#sidebarTabs .tabContents { width:15em; /* instead of 15em */ }
+
+.txtMGTDMain .tab {
+	font-size:80%!important;
+}
+.txtMGTDMain .tabContents {
+	font-size:90%;
+}
+
+
+[[StyleSheet]]
+
+/*}}}*/
+

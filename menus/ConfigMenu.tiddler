@@ -1,0 +1,12 @@
+<<tiddler 'MgtdSettings'>>
+!!Theme
+(Currently <<eval {{config.options.txtTheme}}>>)
+<<selectTheme>>
+
+{{tiny{
+<slider Advanced>
+[[modify menu|ConfigMenu]]
+[[GTDComponent]]
+</slider>
+}}}
+

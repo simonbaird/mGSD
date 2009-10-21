@@ -1,0 +1,91 @@
+/%
+This is the contents of the help you get when you click the question mark button
+%/
+
+!Project
+A [[Project|Projects Dashboard]] is made up of sub-projects, [[Action|Next and Waiting Actions]] items, and [[Reference Items]]. A project should have a defined set of tasks or actions (that may change) and when these tasks are done the project is done. If a project has no defined finish, consider calling it an [[Area]], and then make terminable projects in the area.
+
+!Action
+An [[Action|Next and Waiting Actions]] is a single task that can be completed at one point in time. If an action is more complex than this, considering making it a [[subproject|Subprojects]], or storing information in the action notes area. Using the [[CheckboxPlugin| http://www.tiddlytools.com/#CheckboxPlugin]] you can hid sub-actions inside an action.
+
+!Tickler
+A [[tickler|Tickler Dashboard]] is an [[Action|Next and Waiting Actions]] with a date attached. For example, if you need to call someone as part of a [[Project|Projects Dashboard]], that should be an action. But if you need to call someone on a specific day, then make it a [[tickler|Tickler Dashboard]] and MonkeyGTD will remind you on the day that you need to call them.
+
+Example: The Health area contains a Dentist project with Actions Schedule Dentist, Go To Dentist and File Reimbursement. The latter two are Waiting while Schedule Dentist is Next. Once you call and schedule it, select the Go To Dentist Action, set it to Next, and then choose Make Tickler and set a date for the day of (or the day before) your appointment.
+
+!View
+No help yet for View
+
+!Context
+No help yet for Context
+
+!Area
+An [[Area]] is similar to a project, but it has no possible completion. Areas contain projects.
+
+Example: The Health area might contain the project ''Run Marathon'', and the ''Household'' area might contain projects like ''Sell House'' and ''Buy House'' and ''Plant Garden'', each of which might have sub-projects.
+
+!Realm
+Realms are the top of the MonkeyGTD hierarchy. Realms contain Areas. Areas contain Projects. A Realm is a large-scale division of all the Areas, Projects, and Actions that might be placed into a GTD context.
+
+!Reference
+No help yet for Reference
+
+
+
+!Action Dashboard
+This Dashboard is the place where you can get an overview of your next actions.  
+
+!Action Dashboard by Project
+This Dashboard is the place where you can get an overview of your next actions organised by Project. Note that when doing work you shouldn't be really be using this view. You should be focussed on context rather than project.
+
+!Action Dashboard by Context
+This Dashboard is the place where you can get an overview of your next actions organised by Context. This might be too cluttered if you have a lot of actions.  If you know you are in a particular context consider just clicking the context to focus on that context.
+
+!Next Actions
+No help yet for Next Actions
+
+!Next Actions by Context
+No help yet for Next Actions by Context
+
+!Next Actions by Project
+No help yet for Next Actions by Project
+
+!Projects Dashboard
+No help yet for Projects Dashboard
+
+!Projects Dashboard by Area
+No help yet for Projects Dashboard by Area
+
+!Next and Waiting Actions
+No help yet for Next and Waiting Actions
+
+!Next and Waiting Actions by Context
+No help yet for Next and Waiting Actions by Context
+
+!Next and Waiting Actions by Project
+No help yet for Next and Waiting Actions by Project
+
+!Done Actions
+No help yet for Done Actions
+
+!Active Projects With No Next Action
+No help yet for Active Projects With No Next Action
+
+!Quick Add
+No help yet for Quick Add
+
+!About Quick Add
+No help yet for About Quick Add
+
+!Tickler Dashboard
+No help yet for Tickler Dashboard
+
+!Ticklers Requiring Action
+No help yet for Ticklers Requiring Action
+
+!Reference Items
+No help yet for Reference Items
+
+!Starred Items
+No help yet for Starred Items
+

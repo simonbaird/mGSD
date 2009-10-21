@@ -1,0 +1,5 @@
+<<mgtdList startTag:Project title:'Projects with no area' tags:'!Complete' view:Project mode:global
+	group:ProjectStatus
+	gView:bold
+	where:tiddler.hasNoParent('Area')
+	>>
