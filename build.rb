@@ -5,6 +5,7 @@ Dir.chdir Pathname.new(File.dirname(__FILE__)).realpath
 
 #$LOAD_PATH.unshift("../r4tw") 
 require 'r4tw'
+require 'fileutils'
 
 $version_number = 'G' + `date +%y%m%d | sed 's/^0//'`.chomp! # g for git
 
@@ -181,6 +182,8 @@ make_tw {
   temp1 = get_tiddler('MptwUserConfigPlugin')
 
   remove_tiddler('MptwUserConfigPlugin')
+
+  FileUtils.mkdir('upload') unless File.exist?('upload')
 
   store_to_file          "upload/upgrade3.html" unless ARGV[0] == 'fast'
 
