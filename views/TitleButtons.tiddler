@@ -39,6 +39,7 @@
   <span macro="toggleTag Done . -"></span>
   <span class='title' macro='view title'></span>
   <span macro="miniTag"></span>
+  <span macro="linkToParent Area '[A]'"></span>
   <span macro="linkToParent Project '[P]'"></span>
   <span macro="singleToggleTag tag:Starred"></span>
   [[MonkeyGTDTheme##Subtitle]]
@@ -175,6 +176,7 @@
  </div>
  <div>
   <span class='title' macro='view title'></span>
+  <span macro="linkToParent Area '[A]'"></span>
   <span macro="linkToParent Project '[P]'"></span>
   <span macro="singleToggleTag tag:Starred"></span>
   [[MonkeyGTDTheme##Subtitle]]
