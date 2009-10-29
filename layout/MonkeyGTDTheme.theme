@@ -59,7 +59,10 @@
 <!--{{{-->
 <div class='header' macro='gradient vert [[ColorPalette::PrimaryLight]] [[ColorPalette::PrimaryMid]]'>
 	<div style="float:right" id='searchBox' macro="search Search..."></div>
-	<div class='header2'>MonkeyGTD <span style="font-size:75%;font-weight:normal;" macro="mgtdVersion"></span></div>
+	<div class='header2'>MonkeyGTD
+		<span style="font-size:75%;font-weight:normal;color:[[ColorPalette::PrimaryLight]];" macro="mgtdVersion"></span>
+		<span style="font-size:55%;font-weight:normal;color:[[ColorPalette::PrimaryLight]];">beta</span>
+	</div>
 </div>
 <div macro='gradient vert [[ColorPalette::PrimaryMid]] [[ColorPalette::PrimaryDark]]'>
 	<div style="float:right" id="toggleSideBar"><span macro="toggleSideBar"></span></div>

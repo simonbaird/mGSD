@@ -30,7 +30,7 @@ config.mGTD.tagsToIndex = [
         "TicklerRepeatType"
 ];
 
-config.mgtdVersion = "3.0 alpha __REV__";
+config.mgtdVersion = "__REV__";
 
 config.macros.mgtdVersion={handler:function(place){wikify(config.mgtdVersion,place);}};
 
