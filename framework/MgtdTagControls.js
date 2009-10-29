@@ -624,7 +624,7 @@ merge(config.macros,{
 			if (useTiddler.text != "") {
 				var output = (config.browser.isIE ? // presume IE still can't do data urls
 					"(n)".format([useTiddler.title]) :
-					"{{showNotesIcon{[img[%0|%1]]}}}".format([wikifyPlain(useTiddler.title).replace(/\|/g,''),config.macros.showNotesIcon.imageData])
+					"{{showNotesIcon{[img[%0|%1]]}}}".format([wikifyPlain(useTiddler.title).replace(/\[\]\|/g,''),config.macros.showNotesIcon.imageData])
 				);
 				wikify(output,place,null,useTiddler);
 			}
