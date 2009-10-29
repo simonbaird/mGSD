@@ -7,7 +7,7 @@ Dir.chdir Pathname.new(File.dirname(__FILE__)).realpath
 require 'r4tw'
 require 'fileutils'
 
-$version_number = 'G' + `date +%y%m%d | sed 's/^0//'`.chomp! # g for git
+$version_number = '3.1.0';
 
 required = [
 
