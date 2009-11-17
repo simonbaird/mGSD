@@ -622,10 +622,11 @@ merge(config.macros,{
 		handler: function(place,macroName,params,wikifier,paramString,tiddler) {
 			var useTiddler = params[0] ? store.fetchTiddler(params[0]) : tiddler;
 			if (useTiddler.text != "") {
-				var output = (config.browser.isIE ? // presume IE still can't do data urls
-					"(n)".format([useTiddler.title]) :
-					"{{showNotesIcon{[img[%0|%1]]}}}".format([wikifyPlain(useTiddler.title).replace(/[\[\]\|]/g,''),config.macros.showNotesIcon.imageData])
-				);
+				var safeNoteContent = wikifyPlain(useTiddler.title).trim().replace(/[\[\]\|]/g,'');
+				var noteOutput = (safeNoteContent == "") ?
+					"{{showNotesIcon{[img[%0]]}}}".format([config.macros.showNotesIcon.imageData]) :
+					"{{showNotesIcon{[img[%1|%0]]}}}".format([config.macros.showNotesIcon.imageData,safeNoteContent]);
+				var output = (config.browser.isIE ?  "(n)" : noteOutput); // because IE doesn't support data urls
 				wikify(output,place,null,useTiddler);
 			}
 		}
