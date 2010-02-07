@@ -217,7 +217,16 @@ merge(config.macros,{
 
 			var actOnTiddler = store.getTiddler(title);
 
-			var getValues = fastTagged(tag).sort(function(a,b){
+			//// TODO: refactor. (This realm filtering is copy/pasted this from multiSelectTag...)
+			//the extra || condition below should take care of contexts now. so actually you can have realm specific contexts if you want
+			var thisRealm = tiddler.getParent('Realm')[0];
+			var filterRealm = "";
+			if (thisRealm && tag != "Realm") { // && tag != "Context") {
+				// only want to see things in my realm (or things that don't have a realm...)
+				filterRealm += "(tiddler.tags.contains('"+thisRealm.replace(/'/g,"\\'")+"') || !tiddler.hasParent('Realm'))";
+			}
+
+			var getValues = fastTagged(tag).filterByEval(filterRealm == '' ? 'true' : filterRealm).sort(function(a,b){
 				return a.sorterUtil(b,"orderSlice");
 			});
 
