@@ -38,8 +38,8 @@ config.toggleTagAlwaysTouchModDate = true; // see ToggleTagPlugin
 
 
 
-config.shadowTiddlers.SiteTitle = 'MonkeyGTD';
-config.shadowTiddlers.SiteSubtitle = 'a getting things done system powered by tiddlywiki';
+config.shadowTiddlers.SiteTitle = 'mGTD';
+config.shadowTiddlers.SiteSubtitle = 'the tiddlywiki powered gtd system formerly known as MonkeyGTD';
 
 config.mGTD.getOptChk = function(option) { return store.fetchTiddler('MgtdSettings').tags.contains(option); }
 config.mGTD.getOptTxt = function(fieldName) { return store.fetchTiddler('MgtdSettings').fields[fieldName.toLowerCase()]; }
