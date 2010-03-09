@@ -150,9 +150,20 @@ merge(config.macros,{
 				for (var ii=0;ii<displayThese.length;ii++)
 					story.displayTiddler("bottom",displayThese[ii]);
 
-				alert("Done creating items");
+				displayMessage("Quick add items created");
+
+				// Clear the quick add text area and close the slider. (jQuery anyone?)
+				jQuery(pi).val('');
+				jQuery(pi).closest('.sliderPanel').hide();
+
 				return false;
 			}); // end of createTiddlyButton
+
+			// A button to clear the textarea
+			createTiddlyButton(place,"clear","Clear text",function(){ jQuery(pi).val(''); });
+
+			// A button to close the slider
+			createTiddlyButton(place,"close","Close Quick Add",function(){ jQuery(pi).closest('.sliderPanel').hide(); });
 
 		}
 	}
