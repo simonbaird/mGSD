@@ -391,8 +391,8 @@ merge(config.macros,{
 			// ...yuck
 
 			// exclude ourselves (needed now for action dependencies)
-			filterExpr = '((' + filterExpr + ') && (tiddler.title !=  "' + tiddler.title.replace(/'/g,"\\'") + '"))';
-
+			filterExpr = "((" + filterExpr + ") && (tiddler.title != '" + tiddler.title.replace(/'/g,"\\'") + "'))";
+			
 			var currentVal = tiddler.getParent(tag)[0];
 			if (currentVal && currentVal != '') {
 				// prevent weirdness if the current value isn't in the list
