@@ -418,7 +418,18 @@ merge(config.macros,{
 			var dd = createTiddlyDropDown(place, function(e) {
 					var selectedItem = selectOptions[this.selectedIndex].name;
 					if (selectedItem == '__new__')
-						selectedItem = config.macros.multiSelectTag.createNewItem(tag);
+					{
+						if (tag != "Realm")
+						{
+							if (actOnTiddler.hasParent('Realm'))
+								var realm = actOnTiddler.getParent('Realm');
+							else
+								var realm = config.macros.mgtdList.getRealm();
+						}
+						else
+							var realm = null; // keep from double tagging in silly ways
+						selectedItem = config.macros.multiSelectTag.createNewItem(tag, realm);
+					}
 
 					// if selectedItem is null this works to remove any
 					actOnTiddler.setTagFromGroup(tag,selectedItem);
@@ -446,13 +457,14 @@ merge(config.macros,{
 		},
 
 		// want to reuse this...
-		createNewItem: function(tag) {
+		createNewItem: function(tag, realm) {
 			var selectedItem = prompt("Enter name for new "+tag+":","");
 			if (selectedItem) {
 				selectedItem = config.macros.newTiddler.getName(selectedItem); // from NewMeansNewPlugin
 				var tags = [];
 				tags.push(tag); // make it into the thing you want
-				tags.push(config.macros.mgtdList.getRealm()); // make sure it's got a realm
+				if (realm) // make sure it's got a realm unless it IS a realm
+					tags.push(realm);
 				if (tag == "Project")
 					tags.push("Active"); // if it's a project then make it active...
 				if (tag == "Action")
