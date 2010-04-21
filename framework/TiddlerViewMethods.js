@@ -33,18 +33,25 @@ merge(Tiddler.prototype,{
 	);},
 
 	render_Tickler: function() {
-        var repeatType = this.getByIndex('TicklerRepeatType');
-        var doneControl = "";
-        if (repeatType.length == 0 || repeatType.contains('Once')) {
-            // show normal done checkbox
-            doneControl = '<<toggleTag Actioned [[%0]] ->>';
-        }
-        else if (repeatType.contains('Daily'))   { doneControl = '<<addDay [[%0]]>>' }
-        else if (repeatType.contains('Weekly'))  { doneControl = '<<addWeek [[%0]]>>' }
-        else if (repeatType.contains('Monthly')) { doneControl = '<<addMonth [[%0]]>>' }
-        else if (repeatType.contains('Yearly'))  { doneControl = '<<addYear [[%0]]>>' }
+		var repeatType = this.getByIndex('TicklerRepeatType');
+		var doneControl = "";
+		if (repeatType.length == 0 || repeatType.contains('Once')) {
+			// show normal done checkbox
+			doneControl = '<<toggleTag Actioned [[%0]] ->>';
+		}
+		else if (repeatType.contains('Daily'))   { doneControl = '<<addDay [[%0]]>>' }
+		else if (repeatType.contains('Weekly'))  { doneControl = '<<addWeek [[%0]]>>' }
+		else if (repeatType.contains('Monthly')) { doneControl = '<<addMonth [[%0]]>>' }
+		else if (repeatType.contains('Yearly'))  { doneControl = '<<addYear [[%0]]>>' }
 
-        return this.renderUtil(
+		if (config.mGTD.getOptChk('FullContactInActionLists')) {
+			pLink += "{{projLinkFull{<<linkToParent Project [[title]] [[%0]]>>}}}".format([this.title]);
+		}
+		else {
+			pLink += "{{projLink{<<linkToParent Project '[P]' [[%0]]>>}}}".format([this.title]);
+		}
+
+		return this.renderUtil(
 		'{{tickler{'+
         '%1'+  
 		'<<singleToggleTag tag:Starred title:[[%0]]>>'+
@@ -52,10 +59,12 @@ merge(Tiddler.prototype,{
 		'&nbsp;[[%0]]'+
 		'<<deleteTiddler [[%0]]>>'+
 		'}}}'+
-		'{{notesLink{<<showNotesIcon [[%0]]>>}}}',
+		'{{notesLink{<<showNotesIcon [[%0]]>>}}}'+
+		' %2',
 		[
 			this.title,
-            doneControl.format([this.title])
+            doneControl.format([this.title]),
+			pLine
 		]
 	);},
 
@@ -175,7 +184,7 @@ merge(Tiddler.prototype,{
 		'<<toggleTag Complete [[%0]] ->>'+
 		'@@font-size:80%;<<multiToggleTag tag:ProjectStatus title:[[%0]]>>@@'+
 		'<<singleToggleTag tag:Starred title:[[%0]]>>'+
- 		'}}}',
+		'}}}',
 		[
 			this.title
 		]
