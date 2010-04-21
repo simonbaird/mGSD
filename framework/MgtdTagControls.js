@@ -417,17 +417,18 @@ merge(config.macros,{
 
 			var dd = createTiddlyDropDown(place, function(e) {
 					var selectedItem = selectOptions[this.selectedIndex].name;
-					if (selectedItem == '__new__')
-					{
-						if (tag != "Realm")
-						{
-							if (actOnTiddler.hasParent('Realm'))
-								var realm = actOnTiddler.getParent('Realm');
-							else
-								var realm = config.macros.mgtdList.getRealm();
+					if (selectedItem == '__new__') {
+						// User is creating a new item on the fly via the dropdown
+						var realm = null;
+						if (tag != "Realm") {
+							// Keep from double tagging in silly ways. Don't want realms to have a realm...
+							if (actOnTiddler.hasParent('Realm')) {
+								realm = actOnTiddler.getParent('Realm')[0]; // getParent returns array. use first realm
+							}
+							else {
+								realm = config.macros.mgtdList.getRealm();
+							}
 						}
-						else
-							var realm = null; // keep from double tagging in silly ways
 						selectedItem = config.macros.multiSelectTag.createNewItem(tag, realm);
 					}
 
