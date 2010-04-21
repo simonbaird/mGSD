@@ -6,6 +6,9 @@ Show tickler alerts regardless of realm settings.
 Actions can have multiple contexts. 
 <<toggleTag MultipleContexts MgtdSettings>>
 
+Show full area name next to actions in action lists instead of just [A].
+<<toggleTag FullAreaInActionLists MgtdSettings>>
+
 Show full project name next to actions in action lists instead of just [P].
 <<toggleTag FullProjectInActionLists MgtdSettings>>
 
