@@ -44,6 +44,7 @@ merge(Tiddler.prototype,{
 		else if (repeatType.contains('Monthly')) { doneControl = '<<addMonth [[%0]]>>' }
 		else if (repeatType.contains('Yearly'))  { doneControl = '<<addYear [[%0]]>>' }
 
+		var pLink = "";
 		if (config.mGTD.getOptChk('FullContactInActionLists')) {
 			pLink += "{{projLinkFull{<<linkToParent Project [[title]] [[%0]]>>}}}".format([this.title]);
 		}
@@ -64,7 +65,7 @@ merge(Tiddler.prototype,{
 		[
 			this.title,
             doneControl.format([this.title]),
-			pLine
+			pLink
 		]
 	);},
 
