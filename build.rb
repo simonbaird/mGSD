@@ -7,7 +7,7 @@ Dir.chdir Pathname.new(File.dirname(__FILE__)).realpath
 require 'r4tw'
 require 'fileutils'
 
-$version_number = '3.1.6a';
+$version_number = '3.1.7';
 
 required = [
 
