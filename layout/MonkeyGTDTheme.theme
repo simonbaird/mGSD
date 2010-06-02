@@ -544,7 +544,7 @@ body {
 	border:1px solid #ccc;
 	background-color:#fff;
 	text-align:center;
-	width:8em;
+	width:10em;
 }
 .mgtdList .dateBox { font-weight:medium; font-size:100%; }
 

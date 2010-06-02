@@ -15,6 +15,9 @@ Show full project name next to actions in action lists instead of just [P].
 Show full contact name next to actions in action lists instead of just [C].
 <<toggleTag FullContactInActionLists MgtdSettings>>
 
+Week should start on Monday in calendar popups.
+<<toggleTag WeekStartsMonday MgtdSettings>>
+
 Enter the date format for ticklers.
 Tickler date format:<<mgtdEditField ticklerdateformat MgtdSettings>>
 (see [[Date Formats|http://tiddlywiki.org/wiki/Date_Formats]]) 

@@ -17,11 +17,12 @@ function $id(n) {
 }
 
 DatePicker = {
-	
-	days : ['S','M','T','W','T','F','S'],
-		
+
+	days    : ['S','M','T','W','T','F','S'],
+	daysMon : ['M','T','W','T','F','S','S'],
+
 	cells : new Array(42),
-	
+
 	setup : function(){
 		var cte = createTiddlyElement;
 		var table = this.table = cte(null,"table","datePickerTable");
@@ -32,16 +33,16 @@ DatePicker = {
 		hRow.onclick = stopEvent;
 		cte(hRow,"td",null,"datePickerNav","<<").onclick = DatePicker.prevm;
 		cte(hRow,"td","datePickerMNS",null,null,{colSpan:"5"});
-		cte(hRow,"td",null,"datePickerNav",">>",{align:"right"}).onclick=DatePicker.nextm; 
-		
+		cte(hRow,"td",null,"datePickerNav",">>",{align:"right"}).onclick=DatePicker.nextm;
+
 		var tbody = cte(table,"tbody","datePickerTableBody");
 		var dayRow = cte(tbody,"tr",null,"datePickerDaysHeader");
-		
+
 		for (var i=0; i<this.days.length; i++){
 			cte(dayRow,"td",null,null,this.days[i]);
-		}      
+		}
 	},
-	
+
 	show : function(el,dateObj,cb) {
 		var me = DatePicker;
 		var now = me.now = new Date();
@@ -51,75 +52,76 @@ DatePicker = {
 		if (cb)
 			me.root.datePickerCallback = cb;
 		me.scc = { m : now.getMonth(), y : now.getFullYear(), d : now.getDate() };
-				
+
 		Popup.place(el,me.table,{x:0,y:1});
 
-		
+
 		var cur = [dateObj.getDate(),dateObj.getMonth()+1,dateObj.getFullYear()];
 
 		me.cc = { m : cur[1]-1, y : cur[2] };
-		me.sd = { m : cur[1]-1, y : cur[2], d : cur[0] };   
+		me.sd = { m : cur[1]-1, y : cur[2], d : cur[0] };
 		me.fillCalendar(cur[0],me.scc.d,cur[1]-1,cur[2]);
 	},
-	
+
 	fillCalendar : function(hd,today,cm,cy) {
 		var me = DatePicker;
-		
+
+		var monStart = config.mGTD.getOptChk('WeekStartsMonday');
+
 		var sd = me.now.getDate();
 		var td = new Date(cy,cm,1)
 		var cd = td.getDay();
 
 		$id('datePickerMNS').innerHTML = td.formatString('MMM YYYY')
-		
+
 		var tbody = $id('datePickerTableBody');
 		removeChildren(tbody);
 		var dowRow = createTiddlyElement(tbody,"tr",null,"datePickerDowRow");
 
 		for (var d=0;d<=7;d++) {
 			// dow headings
-			createTiddlyElement(dowRow,"td",null,null,DatePicker.days[d]);
+			createTiddlyElement(dowRow,"td",null,null,DatePicker[monStart?'daysMon':'days'][d]);
 		}
-		
+
 		var days = (new Date(cy, cm+1, 0)).getDate();
 		var day = 1;
 		for (var j=1;j<=6;j++) { //rows
 			var row = createTiddlyElement(tbody,"tr",null,"datePickerDayRow");
 			for (var t=1; t<=7; t++) { //cells
-				var d = 7 * (j-1) - (-t); //id key      
-				if ( (d >= (cd -(-1))) && (d<=cd-(-(days))) ) {
-					var dip = ( ((d-cd < sd) && (cm == me.scc.m) && (cy == me.scc.y)) || (cm < me.scc.m && cy == me.scc.y) || (cy < me.scc.y) );
-					var htd = ( (hd != '') && (d-cd == hd) );
-					var hToday = ( (today != '') && (d-cd == today) && cy == me.scc.y && cm == me.scc.m );
-					if (htd)
-						_class = 'highlightedDate';                
-					else if (dip)
-						_class = 'oldDate';
-					else if (hToday && ! htd)
-						_class = 'todayDate';
-					else
-						_class = 'defaultDate';
-					if (t == 1 || t == 7) {
-						// weekend
-						_class += ' weekend';
-					}
-					var cell = createTiddlyElement(row,"td","datePickerDay"+d,_class,d-cd);
-					cell.onmouseover = function(e){addClass(this,'tdover');};
-					cell.onmouseout = function(e){removeClass(this,'tdover');};
-					cell.onclick = me.selectDate;
-					me.cells[d] = new Date(cy,cm,d-cd);
+				var d = 7 * (j-1) - (-t) + (monStart ? 1 : 0); //id key
+				var is_this_month = ((d >= (cd -(-1))) && (d<=cd-(-(days))));
+				var dip = ( ((d-cd < sd) && (cm == me.scc.m) && (cy == me.scc.y)) || (cm < me.scc.m && cy == me.scc.y) || (cy < me.scc.y) );
+				var htd = ( (hd != '') && (d-cd == hd) );
+				var hToday = ( (today != '') && (d-cd == today) && cy == me.scc.y && cm == me.scc.m );
+				if (htd)
+					_class = 'highlightedDate';
+				else if (dip)
+					_class = 'oldDate';
+				else if (hToday && ! htd)
+					_class = 'todayDate';
+				else
+					_class = 'defaultDate';
+				if ((monStart && (t==6||t==7)) || (!monStart && (t == 1 || t == 7))) {
+					// weekend
+					_class += ' weekend';
 				}
-				else {
-					var cell = createTiddlyElement(row,"td","datePickerDay"+d,"emptyDate");
+				if (!is_this_month) {
+					_class += ' otherMonth';
 				}
+				var cell = createTiddlyElement(row,"td","datePickerDay"+d,_class,(new Date(cy,cm,d-cd)).getDate());
+				cell.onmouseover = function(e){addClass(this,'tdover');};
+				cell.onmouseout = function(e){removeClass(this,'tdover');};
+				cell.onclick = me.selectDate;
+				me.cells[d] = new Date(cy,cm,d-cd);
 				day++;
 			}
 			if(day > days + cd)
 				break;
-		} 
+		}
 	},
-	
+
 	nextm : function() {
-		var me = DatePicker;        
+		var me = DatePicker;
 		me.cc.m += 1;
 		if (me.cc.m >= 12) {
 			me.cc.m = 0;
@@ -128,7 +130,7 @@ DatePicker = {
 		me.fillCalendar(me.getDayStatus(me.cc.m,me.cc.y),me.scc.d,me.cc.m,me.cc.y);
 		return false;
 	},
-	
+
 	prevm : function() {
 		var me = DatePicker;
 		me.cc.m -= 1;
@@ -139,11 +141,11 @@ DatePicker = {
 		me.fillCalendar(me.getDayStatus(me.cc.m,me.cc.y),me.scc.d,me.cc.m,me.cc.y);
 		return false;
 	},
-	
+
 	getDayStatus : function(ccm,ccy){
 		return (ccy == this.sd.y && ccm == this.sd.m)? this.sd.d : '';
 	},
-	
+
 	selectDate : function(ev){
 		var e = ev ? ev : window.event;
 		var me = DatePicker;
@@ -153,16 +155,16 @@ DatePicker = {
 		$id('datePickerTable').style.display = 'none';
 		return false;
 	},
-	
+
 	onclick : function(ev){
 		$id("datePickerTable").style.display = 'none';
 		return false;
 	},
-	
+
 	create : function(el,dateObj,cb){
 		el.onclick = el.onfocus = function(e){DatePicker.show(el,dateObj,cb);stopEvent(e)};
 	},
-	
+
 	css: "table#datePickerTable td.datePickerNav {\n"+
 		"    cursor:pointer;\n"+
 		"}\n"+
@@ -219,7 +221,6 @@ DatePicker = {
 		"	color : #ABABAB;\n"+
 		"    text-decoration : line-through;\n"+
 		"}\n"+
-		"\n"+
 		"tr.datePickerDayRow td.highlightedDate {\n"+
 		"    background : #FFF799;\n"+
 		"	font-weight : bold;\n"+
@@ -234,7 +235,7 @@ DatePicker = {
 		"table#datePickerTable tr.datePickerDayRow td.tdover {\n"+
 		"    background:#fc6;\n"+
 		"}",
-	
+
 	init : function(){
 		this.setup();
 		addEvent(document,'click',DatePicker.onclick);

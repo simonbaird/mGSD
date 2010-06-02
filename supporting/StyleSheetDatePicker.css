@@ -24,7 +24,7 @@ table#datePickerTable {
     /* border-collapse:collapse; */
     background:#FFFFFF;
     border:1px solid #000;
-    display:none;   
+    display:none;
 }
 
 table#datePickerTable td {
@@ -44,8 +44,8 @@ tr.datePickerDayRow td {
 }
 
 tr.datePickerDayRow td.defaultDate {
-	color : #000;	
-	text-decoration : none;   
+	color : #000;
+	text-decoration : none;
 }
 
 tr.datePickerDayRow td.weekend {
@@ -59,12 +59,20 @@ tr.datePickerDowRow td {
 }
 
 tr.datePickerDayRow td.emptyDate {
-    cursor:default; 
+    cursor:default;
 }
 
 tr.datePickerDayRow td.oldDate {
 	color : #ABABAB;
     text-decoration : line-through;
+}
+
+tr.datePickerDayRow td.otherMonth {
+	color : #ccc!important;
+}
+
+tr.datePickerDayRow td.weekend.otherMonth {
+	color : #ddd!important;
 }
 
 tr.datePickerDayRow td.highlightedDate {
