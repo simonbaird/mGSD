@@ -85,6 +85,7 @@
   </span>
   <span macro="showWhenTagged 'Daily'"   ><span macro="addDay"></span></span>
   <span macro="showWhenTagged 'Weekly'"  ><span macro="addWeek"></span></span>
+  <span macro="showWhenTagged 'Fortnightly'"  ><span macro="addFortnight"></span></span>
   <span macro="showWhenTagged 'Monthly'" ><span macro="addMonth"></span></span>
   <span macro="showWhenTagged 'Yearly'"  ><span macro="addYear"></span></span>
   <span class='title' macro='view title'></span>

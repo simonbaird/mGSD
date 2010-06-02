@@ -7,7 +7,7 @@ if (DatePicker) {
 
 		calendarPopup: {
 			handler: function(place,macroName,params,wikifier,paramString,tiddler) {
-				var dateBox = createTiddlyButton(place,params[0],params[1]);            
+				var dateBox = createTiddlyButton(place,params[0],params[1]);
 				dateBox.style.cursor='pointer';
 				DatePicker.create(dateBox,(new Date()),function(el,objDate) {
 					// mostly copy/pasted from NewSavedTiddler. refactor please
@@ -25,15 +25,15 @@ if (DatePicker) {
 
 		dateChooser: {
 			handler: function(place,macroName,params,wikifier,paramString,tiddler) {
-    
+
 				var useTiddler = tiddler;
 				if (params[0])
 					useTiddler = store.fetchTiddler(params[0]);
-    
+
 				var curVal = useTiddler.fields['mgtd_date'] || undefined;
 				var startDate = curVal ? Date.convertFromYYYYMMDDHHMM(curVal) : null;
 
-				var dateBox = createTiddlyElement(place,'input',null,'dateBox');            
+				var dateBox = createTiddlyElement(place,'input',null,'dateBox');
 
 				var dateFormat = config.mGTD.getOptTxt('ticklerdateformat');
 				var defaultDateFormat = 'ddd, DD-mmm-YY';
@@ -43,7 +43,7 @@ if (DatePicker) {
 					config.mGTD.setOptTxt('ticklerdateformat', defaultDateFormat);
 				}
 				dateBox.value = startDate ? startDate.formatString(dateFormat) : '(set date)';
-    
+
 				var callback = function(el,objDate){
 					el.value = objDate.formatString(dateFormat);
 					store.setValue(useTiddler, 'mgtd_date',objDate.convertToYYYYMMDDHHMM());
@@ -53,17 +53,17 @@ if (DatePicker) {
 		},
 
 		addDay: {
-			label:   {addDay:"+d",  addWeek:"+w",   addMonth:"+m",    addYear:"+y"   },
-			tooltip: {addDay:"day", addWeek:"week", addMonth:"month", addYear:"year" },
+            label:   {addDay:"+d",  addWeek:"+w",   addFortnight:"+f",        addMonth:"+m",    addYear:"+y"   },
+			tooltip: {addDay:"day", addWeek:"week", addFortnight:"fortnight", addMonth:"month", addYear:"year" },
 			handler: function(place,macroName,params,wikifier,paramString,tiddler) {
 				var useTiddler = tiddler;
 				if (params[0]) useTiddler = store.fetchTiddler(params[0]);
 				var curVal = useTiddler.fields['mgtd_date'] || undefined;
-				var curDate = curVal ? Date.convertFromYYYYMMDDHHMM(curVal) : new Date();    
+				var curDate = curVal ? Date.convertFromYYYYMMDDHHMM(curVal) : new Date();
 				// ensure ticklers don't have minutes/hours since new Date() has minutes/hours
 				curDate.setHours(0);
 				curDate.setMinutes(0);
-				curDate.setSeconds(0); 
+				curDate.setSeconds(0);
 				// call the applicable date method. happens to match the macroname. see MgtdDateUtils. sorry for confusing code.
 				curDate[macroName](1);
 				createTiddlyButton(place,config.macros.addDay.label[macroName],"add a "+config.macros.addDay.tooltip[macroName],function() {
@@ -75,9 +75,10 @@ if (DatePicker) {
 		}
 	});
 
-	config.macros.addWeek  = config.macros.addDay;
-	config.macros.addMonth = config.macros.addDay;
-	config.macros.addYear  = config.macros.addDay;
+	config.macros.addWeek      = config.macros.addDay;
+	config.macros.addFortnight = config.macros.addDay;
+	config.macros.addMonth     = config.macros.addDay;
+	config.macros.addYear      = config.macros.addDay;
 
 } // if (DatePicker)
 

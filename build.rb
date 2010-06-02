@@ -30,10 +30,11 @@ required = [
   ['Someday/Maybe', 'ProjectStatus', "order:2\nbutton:s/m\nbuttonLong:someday/maybe\n"],
 
   ['Once',        'TicklerRepeatType', "order:1\nbutton:none\nbuttonLong:one time\n"],
-  ['Daily',       'TicklerRepeatType', "order:1\nbutton:none\nbuttonLong:daily\n"],
-  ['Weekly',      'TicklerRepeatType', "order:2\nbutton:week\nbuttonLong:weekly\n"],
-  ['Monthly',     'TicklerRepeatType', "order:3\nbutton:month\nbuttonLong:monthly\n"],
-  ['Yearly',      'TicklerRepeatType', "order:4\nbutton:year\nbuttonLong:yearly\n"],
+  ['Daily',       'TicklerRepeatType', "order:2\nbutton:none\nbuttonLong:daily\n"],
+  ['Weekly',      'TicklerRepeatType', "order:3\nbutton:week\nbuttonLong:weekly\n"],
+  ['Fortnightly', 'TicklerRepeatType', "order:4\nbutton:fortnight\nbuttonLong:fortnightly\n"],
+  ['Monthly',     'TicklerRepeatType', "order:5\nbutton:month\nbuttonLong:monthly\n"],
+  ['Yearly',      'TicklerRepeatType', "order:6\nbutton:year\nbuttonLong:yearly\n"],
 
 ]
 

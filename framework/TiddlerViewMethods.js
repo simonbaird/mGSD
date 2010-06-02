@@ -39,10 +39,11 @@ merge(Tiddler.prototype,{
 			// show normal done checkbox
 			doneControl = '<<toggleTag Actioned [[%0]] ->>';
 		}
-		else if (repeatType.contains('Daily'))   { doneControl = '<<addDay [[%0]]>>' }
-		else if (repeatType.contains('Weekly'))  { doneControl = '<<addWeek [[%0]]>>' }
-		else if (repeatType.contains('Monthly')) { doneControl = '<<addMonth [[%0]]>>' }
-		else if (repeatType.contains('Yearly'))  { doneControl = '<<addYear [[%0]]>>' }
+		else if (repeatType.contains('Daily'))       { doneControl = '<<addDay [[%0]]>>' }
+		else if (repeatType.contains('Weekly'))      { doneControl = '<<addWeek [[%0]]>>' }
+		else if (repeatType.contains('Fortnightly')) { doneControl = '<<addFortnight [[%0]]>>' }
+		else if (repeatType.contains('Monthly'))     { doneControl = '<<addMonth [[%0]]>>' }
+		else if (repeatType.contains('Yearly'))      { doneControl = '<<addYear [[%0]]>>' }
 
 		var pLink = "";
 		if (config.mGTD.getOptChk('FullContactInActionLists')) {
