@@ -8,10 +8,33 @@ merge(Tiddler.prototype,{
 		nowTime.setHours(nowTime.getHours() - hourToActivate); // i'm confused because of UTC versus local. I think mgtd_date is UTC. But has hh:mm:ss is 00:00:00 in local time
 		// a tickler without a date is active now. so please add a date to your ticklers. thanks Arkady Grudzinsky
 		return (!this.fields.mgtd_date || nowTime.convertToYYYYMMDDHHMM() >= this.fields.mgtd_date );
-		
-	}
+	},
 
+	// Contributed by Michael Scherer
+	ticklerWillBeActiveWithin: function(numDays) {
+		// Ignore ticklers without date
+		if (!this.fields.mgtd_date)
+			return false;
+
+		var nowTime = new Date();
+
+		// Respect user settings (see tickerIsActive())
+		var defaultHourToActivate = 5; // fixme put elsewhere
+		var hourToActivate = config.mGTD.getOptTxt('tickleractivatehour') || defaultHourToActivate;
+		if (nowTime.getHours() < hourToActivate) {
+			// Too early in the morning, go back one day.
+			nowTime.setDate(nowTime.getDate() - 1);
+		}
+
+		// Start tomorrow
+		startTime = new Date(nowTime.getFullYear(), nowTime.getMonth(), nowTime.getDate() + 1);
+		// End in numDays days
+		endTime = new Date(nowTime.getFullYear(), nowTime.getMonth(), nowTime.getDate() + 1 + numDays);
+
+		return (startTime.convertToYYYYMMDDHHMM() <= this.fields.mgtd_date && endTime.convertToYYYYMMDDHHMM() > this.fields.mgtd_date);
+	}
 });
+
 merge(config.macros,{
 
 	ticklerAlert: {

@@ -5,16 +5,28 @@
 
 <<tiddler 'Ticklers Requiring Action'>>
 
+<<mgtdList title:'Upcoming Ticklers (next 7 days)'
+       startTag:Tickler
+       tags:'!Actioned'
+       view:Tickler
+       mode:global
+       newButtonTags:'Tickler Once'
+       where:'tiddler.ticklerWillBeActiveWithin(7)'
+       sort:'tickleDate'
+       ignoreRealm:{{config.mGTD.getOptChk('AlertsIgnoreRealm')?'yes':''}}
+>>
+
 <<mgtdList title:'Upcoming Ticklers'
 	startTag:Tickler
 	tags:'!Actioned'
 	view:Tickler
 	mode:global
 	newButtonTags:'Tickler Once'
-	where:'!tiddler.fields.mgtd_date || !tiddler.ticklerIsActive()'
+    where:'(!tiddler.fields.mgtd_date || !tiddler.ticklerIsActive()) && !tiddler.ticklerWillBeActiveWithin(7)'
 	sort:'tickleDate'
 	ignoreRealm:{{config.mGTD.getOptChk('AlertsIgnoreRealm')?'yes':''}}
-	>>
+>>
+
 
 }}}
 
@@ -27,7 +39,7 @@
 	view:Tickler
 	mode:global
 	newButtonTags:'Tickler Actioned Once'
-	>>
+>>
 
 }}}
 

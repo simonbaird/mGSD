@@ -19,6 +19,21 @@
     ignoreRealm:{{config.mGTD.getOptChk('AlertsIgnoreRealm')?'yes':''}}
 >>
 
+<<mgtdList
+    title:'Upcoming Ticklers Grouped (next 7 days)'
+    startTag:Tickler
+    tags:'!Actioned'
+    view:Tickler
+    group:Contact
+    gView:bold
+    mode:global
+    newButtonTags:'Tickler Enabled Once'
+    where:'tiddler.ticklerWillBeActiveWithin(7)'
+    sort:'tickleDate'
+    dontShowEmpty:yes
+    ignoreRealm:{{config.mGTD.getOptChk('AlertsIgnoreRealm')?'yes':''}}
+>>
+
 }}}
 
 {{col{
@@ -32,7 +47,7 @@
     gView:bold
     mode:global
     newButtonTags:'Tickler Enabled Once'
-    where:'!tiddler.fields.mgtd_date || !tiddler.ticklerIsActive()'
+    where:'(!tiddler.fields.mgtd_date || !tiddler.ticklerIsActive()) && !tiddler.ticklerWillBeActiveWithin(7)'
     sort:'tickleDate'
     dontShowEmpty:yes
     ignoreRealm:{{config.mGTD.getOptChk('AlertsIgnoreRealm')?'yes':''}}
