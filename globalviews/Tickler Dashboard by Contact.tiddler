@@ -30,7 +30,6 @@
     newButtonTags:'Tickler Enabled Once'
     where:'tiddler.ticklerWillBeActiveWithin(7)'
     sort:'tickleDate'
-    dontShowEmpty:yes
     ignoreRealm:{{config.mGTD.getOptChk('AlertsIgnoreRealm')?'yes':''}}
 >>
 
@@ -49,7 +48,6 @@
     newButtonTags:'Tickler Enabled Once'
     where:'(!tiddler.fields.mgtd_date || !tiddler.ticklerIsActive()) && !tiddler.ticklerWillBeActiveWithin(7)'
     sort:'tickleDate'
-    dontShowEmpty:yes
     ignoreRealm:{{config.mGTD.getOptChk('AlertsIgnoreRealm')?'yes':''}}
 >>
 
