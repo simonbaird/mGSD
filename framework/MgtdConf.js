@@ -1,33 +1,33 @@
-		
+
 config.options.txtTheme = 'MonkeyGTDTheme';
 
 if (!config.mGTD) config.mGTD = {};
 
 config.mGTD.specialTags = [
-		"Action",
-		"Project",
-		"Area",
-		//"Realm",
-		"Context",
-		"View",
-        "Tickler",
-		"Reference",
-		"Contact"
+  "Action",
+  "Project",
+  "Area",
+  //"Realm",
+  "Context",
+  "View",
+  "Tickler",
+  "Reference",
+  "Contact"
 ];
 
 config.mGTD.tagsToIndex = [
-		"Action",   // needed for action dependencies
-		"Project",
-		"Area",
-		"Realm",
-		"Context",
-		"ActionStatus",
-		"TicklerStatus",
-		"ProjectStatus",
-		"GTDComponent",
-		"Sidebar",
-		"Contact",
-        "TicklerRepeatType"
+  "Action",   // needed for action dependencies
+  "Project",
+  "Area",
+  "Realm",
+  "Context",
+  "ActionStatus",
+  "TicklerStatus",
+  "ProjectStatus",
+  "GTDComponent",
+  "Sidebar",
+  "Contact",
+  "TicklerRepeatType"
 ];
 
 config.mgtdVersion = "__REV__";
@@ -49,8 +49,8 @@ config.mGTD.setOptTxt = function(fieldName,fieldValue) { store.fetchTiddler('Mgt
 window.coreWikify = wikify;
 window.wikify = function(source,output,highlightRegExp,tiddler)
 {
-	if (source) arguments[0]=source.replace(/\\\\\n/mg,"<br>");
-	coreWikify.apply(this,arguments);
+  if (source) arguments[0]=source.replace(/\\\\\n/mg,"<br>");
+  coreWikify.apply(this,arguments);
 }
 
 readOnly = false;
