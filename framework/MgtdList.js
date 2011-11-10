@@ -342,8 +342,6 @@ merge(config.macros,{
       if (!(dontShowEmpty == "yes" && emptyList))
         wikify(wikifyThis,place,null,tiddler);
 
-      forceReflow(); // fixes rendering issues. (but probably doubles up rendering time??)
-
     }
   }
 
