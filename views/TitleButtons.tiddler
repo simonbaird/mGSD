@@ -65,7 +65,7 @@
   <br style="clear:left"/>
   <div class="floatleft">
     <span class="label">Depends on:</span><br/><span macro="multiSelectTag Action allowNone:on"></span><span macro="linkToParent Action"></span>
-   <!-- fixme. broken in 2.4.1 but works in 2.4.3?: <span macro="newSavedTiddler title:'new dependent action' label:'+ dependent action' tag:{{'Action Future [['+config.macros.mgtdList.getRealm()+']] [['+tiddler.getParent('Context')+']] [['+tiddler.getParent('Project')+']] [['+tiddler.title +']]'}}"></span> -->
+    <span macro="newSavedTiddler title:'new dependent action' label:'+ dependent action' tag:{{'Action Future \[\['+tiddler.getByIndex('Realm').join('\]\] \[\[')+'\]\] \[\['+tiddler.getParent('Context').join('\]\] \[\[')+'\]\] \[\['+tiddler.getParent('Project')+'\]\] \[\['+tiddler.title+'\]\]'}}"></span>
   </div>
   <div class="clearboth"></div>
  </div>

@@ -3,6 +3,11 @@ config.macros.newSavedTiddler.handler = function(place,macroName,params,wikifier
 	if (readOnly) {
 		return false;
 	}
+	//
+	// temporarily fix global tiddler reference for possible usage in executable params
+	//
+	var currentTiddler = window.tiddler;
+	window.tiddler = tiddler;
 	var p = paramString.parseParams("anon",null,true,false,false);
 	var label = getParam(p,"label","NewSavedTiddler");
 	var tooltip = getParam(p,"tooltip","");
@@ -28,10 +33,17 @@ config.macros.newSavedTiddler.handler = function(place,macroName,params,wikifier
 	}
 	var btn = createTiddlyButton(place,label,tooltip,this.onClick);
 	btn.params = paramString;
+	btn.tiddler = tiddler; // save tiddler reference this button relates to
+	window.tiddler = currentTiddler; // restore global tiddler reference
 	return false;
 };
 
 config.macros.newSavedTiddler.onClick = function(e) {
+	//
+	// temporarily fix global tiddler reference for possible usage in executable params
+	//
+	var currentTiddler = window.tiddler;
+	window.tiddler = this.tiddler;
 	var p = this.params.parseParams("anon",null,true,false,false);
 	var titlePrompt = getParam(p,"prompt","");
 	//
@@ -71,6 +83,7 @@ config.macros.newSavedTiddler.onClick = function(e) {
 		autoSaveChanges(null,[tiddler]);
 		story.displayTiddler(this,title);
 	}
+	window.tiddler = currentTiddler; // restore global tiddler reference
 	return false;
 }
 

@@ -42,7 +42,7 @@
 	<span macro='toolbar closeTiddler closeOthers +editTiddler deleteTiddler > fields syncing permalink references jump'></span>
 	<span macro='newHere label:"new here" tag:Reference'></span>
 	<span macro='newJournalHere {{config.mGTD.getOptTxt("newjournaldateformat")?config.mGTD.getOptTxt("newjournaldateformat"):"DD-mmm-YY 0hh:0mm"}} tag:Reference'></span>
-		<span macro="showWhenTagged Action"><span macro="newSavedTiddler title:'new dependent action' label:'new dependent action' tag:{{'Action Future [['+config.macros.mgtdList.getRealm()+']] [['+tiddler.getParent('Context')+']] [['+tiddler.getParent('Project')+']] [['+tiddler.title+']]'}}"></span></span>
+	<span macro="showWhenTagged Action"><span macro="newSavedTiddler title:'new dependent action' label:'new dependent action' tag:{{'Action Future \[\['+tiddler.getByIndex('Realm').join('\]\] \[\[')+'\]\] \[\['+tiddler.getParent('Context').join('\]\] \[\[')+'\]\] \[\['+tiddler.getParent('Project')+'\]\] \[\['+tiddler.title+'\]\]'}}"></span></span>
 </div>
 <!--}}}-->
 
