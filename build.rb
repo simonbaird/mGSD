@@ -4,7 +4,7 @@ require 'pathname'
 Dir.chdir Pathname.new(File.dirname(__FILE__)).realpath
 
 #$LOAD_PATH.unshift("../r4tw") 
-require 'r4tw'
+require './r4tw'
 require 'fileutils'
 
 $version_number = '3.1.9';
