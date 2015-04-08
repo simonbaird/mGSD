@@ -444,6 +444,10 @@ class Tiddler
     get_slices[slice]
   end
 
+  def get_sections
+    @fields['text'].scan(/^!([^\n]+)$/m).map { |m| m[0].chomp } # chomp is a kludge because i don't know what is going on with line breaks atm..
+  end
+
   #
   # Experimental. Provides access to plugin meta slices.
   # Returns one meta value or a hash of them if no argument is given

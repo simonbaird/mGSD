@@ -102,14 +102,6 @@ demo = [
 
 ]
 
-
-# TODO put into r4tw
-class Tiddler
-  def get_sections
-    @fields['text'].scan(/^!([^\n]+)$/m).map { |m| m[0].chomp } # chomp is a kludge because i don't know what is going on with line breaks atm..
-  end
-end 
-
 make_tw {
 
   # actually this is an mptw empty file not a bare one
