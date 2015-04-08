@@ -223,5 +223,4 @@ http://previous.townsville.qld.gov.au/theatre/TheatreSeason.asp
 }
 
 
-`cp upload/upgrade3.html ~/GTD`
-
+# `cp upload/upgrade3.html ~/GTD`
