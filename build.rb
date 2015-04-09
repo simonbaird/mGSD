@@ -4,7 +4,7 @@ require 'pathname'
 Dir.chdir Pathname.new(File.dirname(__FILE__)).realpath
 
 #$LOAD_PATH.unshift("../r4tw") 
-require 'r4tw'
+require './r4tw'
 require 'fileutils'
 
 $version_number = '3.1.9';
@@ -101,14 +101,6 @@ demo = [
   ['Action D depends on C and A', "Action [[Test deps]] Future [[Action C]] [[Action A]]"], # depends on two actions...
 
 ]
-
-
-# TODO put into r4tw
-class Tiddler
-  def get_sections
-    @fields['text'].scan(/^!([^\n]+)$/m).map { |m| m[0].chomp } # chomp is a kludge because i don't know what is going on with line breaks atm..
-  end
-end 
 
 make_tw {
 
@@ -231,5 +223,4 @@ http://previous.townsville.qld.gov.au/theatre/TheatreSeason.asp
 }
 
 
-`cp upload/upgrade3.html ~/GTD`
-
+# `cp upload/upgrade3.html ~/GTD`

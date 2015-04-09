@@ -444,6 +444,10 @@ class Tiddler
     get_slices[slice]
   end
 
+  def get_sections
+    @fields['text'].scan(/^!([^\n]+)$/m).map { |m| m[0].chomp } # chomp is a kludge because i don't know what is going on with line breaks atm..
+  end
+
   #
   # Experimental. Provides access to plugin meta slices.
   # Returns one meta value or a hash of them if no argument is given
@@ -502,7 +506,7 @@ class TiddlyWiki
     # stupid ctrl (\r) char
     #@raw.eat_ctrl_m!
 
-    if @raw !~ /var version = \{title: "TiddlyWiki", major: 2, minor: [23456]/ # fix me
+    if @raw !~ /var version = \{title: "TiddlyWiki", major: 2, minor: [2345678]/ # fix me
       @use_pre = false
     end
 
